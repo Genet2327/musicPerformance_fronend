@@ -10,8 +10,8 @@ import ViewTutorial from "./views/ViewTutorial.vue";
 import AddLesson from "./views/AddLesson.vue";
 import EditLesson from "./views/EditLesson.vue";
 
-import RoleList from "./views/Role/RoleList.vue";
-import EditRole from "./views/Role/EditRole.vue";
+import RoleList from "./views/Role/List";
+import EditRole from "./views/Role/Edit.vue";
 
 Vue.use(Router);
 

@@ -1,11 +1,8 @@
 <template>
   <div>
-    
     <v-app-bar app>
       <v-toolbar-side-icon></v-toolbar-side-icon>
-
-
-      <router-link :to="{ name: 'tutorials' }">
+      <router-link :to="{ name: 'Music Perfomanse' }">
         <v-img
           class="mx-2"
           src="../assets/oc-logo-white.png"
@@ -18,7 +15,16 @@
         <div>{{ this.title }}</div>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      
+      <v-toolbar-items v-if="user != 'null'">
+        <v-btn
+          v-show="user.role == 'Stu'"
+          exact
+          :to="{ name: 'RoleList' }"
+          text
+        >
+          Roles
+        </v-btn>
+      </v-toolbar-items>
       <v-menu bottom min-width="200px" rounded offset-y v-if="user != null">
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon x-large v-on="on" v-bind="attrs">
@@ -43,13 +49,9 @@
               <v-btn depressed rounded text @click="logout()"> Logout </v-btn>
             </div>
           </v-list-item-content>
-          
         </v-card>
       </v-menu>
-      
     </v-app-bar>
-    
- 
   </div>
 </template>
 
@@ -61,7 +63,7 @@ export default {
   name: "App",
   data: () => ({
     user: {},
-    title: "Tutorials",
+    title: "Music Peformance",
     initials: "",
     name: "",
   }),
