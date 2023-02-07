@@ -13,6 +13,7 @@ import EditLesson from "./views/EditLesson.vue";
 import RoleList from "./views/Role/List";
 import EditRole from "./views/Role/Edit.vue";
 
+import Home from "./views/Home/home.vue";
 Vue.use(Router);
 
 const router = new Router({
@@ -60,6 +61,11 @@ const router = new Router({
       name: "editLesson",
       component: EditLesson,
       props: true,
+    },
+    {
+      path: "/Home",
+      name: "Home",
+      component: Home,
     },
     {
       path: "/RoleList",

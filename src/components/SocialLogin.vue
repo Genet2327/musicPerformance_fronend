@@ -57,7 +57,7 @@ export default {
           Utils.setStore("user", this.user);
           this.fName = this.user.fName;
           this.lName = this.user.lName;
-          this.$router.push({ name: "tutorials" });
+          this.$router.push({ name: "Home" });
           this.$router.go();
         })
         .catch((error) => {
