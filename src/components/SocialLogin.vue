@@ -1,8 +1,10 @@
 <template>
   <div class="signup-buttons">
+    <v-col>
     <v-row justify="center">
       <div display="flex" id="parent_id"></div>
     </v-row>
+  </v-col>
   </div>
 </template>
 
@@ -57,7 +59,7 @@ export default {
           Utils.setStore("user", this.user);
           this.fName = this.user.fName;
           this.lName = this.user.lName;
-          this.$router.push({ name: "tutorials" });
+          this.$router.push({ name: "Home" });
           this.$router.go();
         })
         .catch((error) => {
