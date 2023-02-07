@@ -26,6 +26,7 @@ jobs:
           echo VUE_APP_CLIENT_URL=perform.eaglesoftwareteams.com >> .env
           echo VUE_APP_SITE_URL=perform.eaglesoftwareteams.com >> .env
 
+
       - run: npm install
       - run: npm run build
       - run: npm run bundle
