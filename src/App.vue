@@ -1,10 +1,15 @@
 <template>
   <v-app>
-    <MenuBar :key="$route.fullPath"></MenuBar>
+    <v-layout row>
+
+    <MenuBar ></MenuBar>
+ 
     <v-main>
       <router-view />
     </v-main>
+  </v-layout>
   </v-app>
+
 </template>
 
 <script>
@@ -20,3 +25,4 @@ export default {
   methods: {},
 };
 </script>
+ 

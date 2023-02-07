@@ -13,6 +13,15 @@ import EditLesson from "./views/EditLesson.vue";
 import RoleList from "./views/Role/List";
 import EditRole from "./views/Role/Edit.vue";
 
+import ComposerList from "./views/Composer/List";
+import EditComposer from "./views/Composer/Edit";
+import AddComposer from "./views/Composer/Add";
+
+import InstrumentList from "./views/instrument/List";
+import EditInstrument from "./views/instrument/Edit";
+import AddInstrument from "./views/instrument/Add";
+
+import Home from "./views/Home/home.vue";
 Vue.use(Router);
 
 const router = new Router({
@@ -62,6 +71,11 @@ const router = new Router({
       props: true,
     },
     {
+      path: "/Home",
+      name: "Home",
+      component: Home,
+    },
+    {
       path: "/RoleList",
       name: "RoleList",
       component: RoleList,
@@ -72,6 +86,40 @@ const router = new Router({
       name: "EditRole",
       component: EditRole,
       props: true,
+    },
+    {
+      path: "/ComposerList",
+      name: "ComposerList",
+      component: ComposerList,
+    },
+   
+    {
+      path: "/edit-Composer/:id",
+      name: "EditComposer",
+      component: EditComposer,
+      props: true,
+    },
+    {
+      path: "/AddComposer",
+      name: "AddComposer",
+      component: AddComposer,
+    },
+    {
+      path: "/InstrumentList",
+      name: "InstrumentList",
+      component: InstrumentList,
+    },
+   
+    {
+      path: "/edit-Instrument/:id",
+      name: "EditInstrument",
+      component: EditInstrument,
+      props: true,
+    },
+    {
+      path: "/AddInstrument",
+      name: "AddInstrument",
+      component: AddInstrument,
     },
   ],
 });
