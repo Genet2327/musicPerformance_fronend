@@ -1,11 +1,11 @@
 <template>
   
-  <v-navigation-drawer darek="false" color="red lighten-3"
+  <v-navigation-drawer darek="false" color="red darken-4"
     permanent
     expand-on-hover
   >
     <v-list>
-      <v-list-item dark="false" class="px-2">
+      <v-list-item class="px-2">
         <v-list-item-avatar>
          {{initials}}
         </v-list-item-avatar>
@@ -44,18 +44,6 @@
           <v-icon>mdi-star</v-icon>
         </v-list-item-icon>
         <v-list-item-title><v-btn   exact :to="{ name: 'RoleList' }" text>Roles </v-btn></v-list-item-title>
-      </v-list-item>
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-star</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title><v-btn   exact :to="{ name: 'EventSessionList' }" text>Event </v-btn></v-list-item-title>
-      </v-list-item>
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-star</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title><v-btn   exact :to="{ name: 'tutorials' }" text>Event </v-btn></v-list-item-title>
       </v-list-item>
       <v-list-item link>
         <v-list-item-icon>

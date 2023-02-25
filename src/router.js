@@ -21,11 +21,6 @@ import InstrumentList from "./views/instrument/List";
 import EditInstrument from "./views/instrument/Edit";
 import AddInstrument from "./views/instrument/Add";
 
-import EventSessionList from "./views/EventSession/List";
-import EditEventSession from "./views/EventSession/Edit";
-import AddEventSession from "./views/EventSession/Add";
-import ViewEventSession from "./views/EventSession/View";
-
 import Home from "./views/Home/home.vue";
 Vue.use(Router);
 
@@ -125,29 +120,6 @@ const router = new Router({
       path: "/AddInstrument",
       name: "AddInstrument",
       component: AddInstrument,
-    },
-    {
-      path: "/EventSessionList",
-      name: "EventSessionList",
-      component: EventSessionList,
-    },
-   
-    {
-      path: "/edit-EventSession/:id",
-      name: "EditEventSession",
-      component: EditEventSession,
-      props: true,
-    },
-    {
-      path: "/AddEventSession",
-      name: "AddEventSession",
-      component: AddEventSession,
-    },
-    {
-      path: "/viewEventSession/:id",
-      name: "viewEventSession",
-      component: ViewEventSession,
-      props: true,
     },
   ],
 });

@@ -7,7 +7,7 @@ var baseurl = "";
 if (process.env.NODE_ENV === "development") {
   baseurl = "http://localhost:3026/performance-t6/";
 } else {
-  baseurl = "/tutorial/";
+  baseurl = "/performance-t6/";
 }
 
 const apiClient = axios.create({
