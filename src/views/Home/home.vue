@@ -1,6 +1,8 @@
 <template>
   
-    <v-navigation-drawer color="red darken-4"
+    
+  
+  <v-navigation-drawer color="red darken-4"
       permanent
       expand-on-hover
     >
