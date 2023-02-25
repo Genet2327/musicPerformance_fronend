@@ -1,8 +1,10 @@
 <template>
   <div class="signup-buttons">
+    <v-col>
     <v-row justify="center">
       <div display="flex" id="parent_id"></div>
     </v-row>
+  </v-col>
   </div>
 </template>
 
