@@ -76,7 +76,7 @@ export default {
       headers: [
         { text: "First Name", value: "fName" },
         { text: "Last Name", value: "lName" },
-        { text: "Role", value: "role" },
+        { text: "Role", value: "roles[0].name" },
         { text: "Actions", value: "actions", sortable: false },
       ],
     };
