@@ -11,7 +11,7 @@
       <br />
       <v-form ref="form" v-model="valid" lazy validation>
         <v-text-field
-          v-model="role.fName"
+          v-model="user.fName"
           id="name"
           :counter="50"
           label="First Name"
@@ -19,7 +19,7 @@
         >
         </v-text-field>
         <v-text-field
-          v-model="role.lName"
+          v-model="user.lName"
           id="name"
           :counter="50"
           label="Last Name"
@@ -27,8 +27,8 @@
         ></v-text-field>
 
         <v-select
-          v-model="name"
-          :items="roless"
+          v-model="roleName"
+          :items="roles"
           item-text="name"
           filled
           return-object
@@ -58,11 +58,11 @@ export default {
   data() {
     return {
       valid: false,
-      items: ["Stu", "Admin", "Adv"],
-      role: {},
-      roless: [],
-      name:{},
-      roleId: null,
+
+      user: {},
+      roles: [],
+      roleName: {},
+
       message: "Enter data and click save",
     };
   },
@@ -70,8 +70,8 @@ export default {
     retrieveUser() {
       RoleServices.get(this.id)
         .then((response) => {
-          this.role = response.data;
-          this.name = this.role.roles[0];
+          this.user = response.data;
+          this.roleName = this.user.roles[0];
         })
         .catch((e) => {
           this.message = e.response.data.message;
@@ -80,7 +80,7 @@ export default {
     retrieveRoles() {
       RoleServices.getRoles()
         .then((response) => {
-          this.roless = response.data;
+          this.roles = response.data;
         })
         .catch((e) => {
           this.message = e.response.data.message;
@@ -89,13 +89,13 @@ export default {
 
     updateRole() {
       var data = {
-        fName: this.role.fName,
-        lName: this.role.lName,
-        roles:this.name,
+        fName: this.user.fName,
+        lName: this.user.lName,
+        roles: this.roleName.id,
       };
       RoleServices.update(this.id, data)
         .then((response) => {
-          this.role.id = response.data.id;
+          this.user.id = response.data.id;
           this.$router.push({ name: "RoleList" });
         })
         .catch((e) => {
