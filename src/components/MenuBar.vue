@@ -43,7 +43,14 @@
         <v-list-item-icon>
           <v-icon>mdi-star</v-icon>
         </v-list-item-icon>
+
         <v-list-item-title><v-btn   exact :to="{ name: 'RoleList' }" text>Roles </v-btn></v-list-item-title>
+      </v-list-item>
+      <v-list-item link>
+        <v-list-item-icon>
+          <v-icon>mdi-folder</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>  <v-btn   exact :to="{ name: 'AddCritique' }" text>Critiques </v-btn></v-list-item-title>
       </v-list-item>
       <v-list-item link>
         <v-list-item-icon>
