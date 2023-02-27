@@ -19,6 +19,10 @@ import InstrumentList from "./views/instrument/List";
 import EditInstrument from "./views/instrument/Edit";
 import AddInstrument from "./views/instrument/Add";
 
+import ComposerList from "./views/Composer/List";
+import EditComposer from "./views/Composer/Edit";
+import AddComposer from "./views/Composer/Add";
+
 import Home from "./views/Home/home.vue";
 Vue.use(Router);
 
@@ -102,6 +106,23 @@ const router = new Router({
       path: "/AddInstrument",
       name: "AddInstrument",
       component: AddInstrument,
+    },
+    {
+      path: "/ComposerList",
+      name: "ComposerList",
+      component: ComposerList,
+    },
+   
+    {
+      path: "/edit-Composer/:id",
+      name: "EditComposer",
+      component: EditComposer,
+      props: true,
+    },
+    {
+      path: "/AddComposer",
+      name: "AddComposer",
+      component: AddComposer,
     },
   ],
 });
