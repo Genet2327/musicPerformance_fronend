@@ -1,11 +1,11 @@
 <template>
   
-  <v-navigation-drawer darek="false" color="red darken-4"
+  <v-navigation-drawer darek="false" color="red darken-4" dark
     permanent
     expand-on-hover
-  >
+ v-show="user!=null" >
     <v-list>
-      <v-list-item class="px-2">
+      <v-list-item  class="px-2">
         <v-list-item-avatar>
          {{initials}}
         </v-list-item-avatar>
@@ -27,23 +27,38 @@
       nav
       dense
     >
-      <v-list-item link>
+    
+      <v-list-item v-show="role=='ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-folder</v-icon>
         </v-list-item-icon>
         <v-list-item-title>  <v-btn   exact :to="{ name: 'ComposerList' }" text>Composer </v-btn></v-list-item-title>
       </v-list-item>
-      <v-list-item link>
+      <v-list-item v-show="role=='ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
         <v-list-item-title>  <v-btn   exact :to="{ name: 'InstrumentList' }" text>Instrument </v-btn></v-list-item-title>
       </v-list-item>
-      <v-list-item link>
+      <v-list-item v-show="role=='ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-star</v-icon>
         </v-list-item-icon>
-        <v-list-item-title><v-btn   exact :to="{ name: 'RoleList' }" text>Roles </v-btn></v-list-item-title>
+
+        <v-list-item-title><v-btn  exact :to="{ name: 'RoleList' }" text>Roles </v-btn></v-list-item-title>
+      </v-list-item>
+      <v-list-item v-show="role=='ADMIN'" link>
+        <v-list-item-icon>
+          <v-icon>mdi-star</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-title><v-btn   exact :to="{ name: 'EventSessionList' }" text>Event </v-btn></v-list-item-title>
+      </v-list-item>
+      <v-list-item v-show="role=='FACULITY'" link>
+        <v-list-item-icon>
+          <v-icon>mdi-folder</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>  <v-btn   exact :to="{ name: 'AddCritique' }" text>Critiques </v-btn></v-list-item-title>
       </v-list-item>
       <v-list-item link>
         <v-list-item-icon>
@@ -67,6 +82,7 @@ data: () => ({
   initials: "",
   name: "",
   email:"",
+  role:'',
 }),
 async created() {
   this.resetMenu();
@@ -87,7 +103,8 @@ methods: {
     if (this.user != null) {
       this.initials = this.user.fName[0] + this.user.lName[0];
       this.name = this.user.fName + " " + this.user.lName;
-      this.email=this.user.email
+      this.email=this.user.email;
+      this.role=this.user.role[0];
     }
   },
   logout() {
