@@ -34,7 +34,6 @@
       </v-list-item>
       <v-list-item link>
         <v-list-item-icon>
-          <v-icon>mdi-folder</v-icon>
         </v-list-item-icon>
         <v-list-item-title>  <v-btn   exact :to="{ name: 'Recital Sign Up' }" text>'Recital Sign Up' </v-btn></v-list-item-title>
       </v-list-item>
