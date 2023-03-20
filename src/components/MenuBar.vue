@@ -1,64 +1,64 @@
 <template>
-  
-  <v-navigation-drawer darek="false" color="red darken-4" dark
-    permanent
-    expand-on-hover
- v-show="user!=null" >
+  <v-navigation-drawer darek="false" color="red darken-4" dark permanent expand-on-hover v-show="user != null">
     <v-list>
-      <v-list-item  class="px-2">
+      <v-list-item class="px-2">
         <v-list-item-avatar>
-         {{initials}}
+          {{ initials }}
         </v-list-item-avatar>
       </v-list-item>
 
       <v-list-item link>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
-           {{name}}
+            {{ name }}
           </v-list-item-title>
-          <v-list-item-subtitle>{{email}}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-list>
 
     <v-divider></v-divider>
 
-    <v-list
-      nav
-      dense
-    >
-    
-      <v-list-item v-show="role=='ADMIN'" link>
+    <v-list nav dense>
+
+      <v-list-item v-show="role == 'ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-folder</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>  <v-btn   exact :to="{ name: 'ComposerList' }" text>Composer </v-btn></v-list-item-title>
+        <v-list-item-title> <v-btn exact :to="{ name: 'ComposerList' }" text>Composer </v-btn></v-list-item-title>
       </v-list-item>
-      <v-list-item v-show="role=='ADMIN'" link>
+      <v-list-item v-show="role == 'ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>  <v-btn   exact :to="{ name: 'InstrumentList' }" text>Instrument </v-btn></v-list-item-title>
+        <v-list-item-title> <v-btn exact :to="{ name: 'InstrumentList' }" text>Instrument </v-btn></v-list-item-title>
       </v-list-item>
-      <v-list-item v-show="role=='ADMIN'" link>
+      <v-list-item  link>
         <v-list-item-icon>
           <v-icon>mdi-star</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-title><v-btn  exact :to="{ name: 'RoleList' }" text>Roles </v-btn></v-list-item-title>
+        <v-list-item-title><v-btn exact :to="{ name: 'RoleList' }" text>Roles </v-btn></v-list-item-title>
       </v-list-item>
-      <v-list-item v-show="role=='ADMIN'" link>
+      <v-list-item v-show="role == 'ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-star</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-title><v-btn   exact :to="{ name: 'EventSessionList' }" text>Event </v-btn></v-list-item-title>
+        <v-list-item-title><v-btn exact :to="{ name: 'EventSessionList' }" text>Event </v-btn></v-list-item-title>
       </v-list-item>
-      <v-list-item v-show="role=='FACULITY'" link>
+      <v-list-item v-show="role == 'FACULITY'" link>
         <v-list-item-icon>
           <v-icon>mdi-folder</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>  <v-btn   exact :to="{ name: 'AddCritique' }" text>Critiques </v-btn></v-list-item-title>
+        <v-list-item-title> <v-btn exact :to="{ name: 'AddCritique' }" text>Critiques </v-btn></v-list-item-title>
+      </v-list-item>
+
+      <v-list-item link>
+        <v-list-item-icon>
+          <v-icon>mdi-folder</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title> <v-btn exact :to="{ name: 'AddSong' }" text>Song </v-btn></v-list-item-title>
       </v-list-item>
       <v-list-item link>
         <v-list-item-icon>
@@ -68,58 +68,57 @@
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
-
 </template>
 <script>
 import Utils from "@/config/utils.js";
 import AuthServices from "@/services/authServices";
 
 export default {
-name: "App",
-data: () => ({
-  user: {},
-  title: "Music Peformance",
-  initials: "",
-  name: "",
-  email:"",
-  role:'',
-}),
-async created() {
-  this.resetMenu();
-},
-async mounted() {
-  this.resetMenu();
-},
-computed: {
-  // _link() {
-  //     return "/" + this.selectedRoles.toLowerCase() + "Home/" + this.currentPersonRoleID;
-  // }
-},
-methods: {
-  resetMenu() {
-    this.user = null;
-    // ensures that their name gets set properly from store
-    this.user = Utils.getStore("user");
-    if (this.user != null) {
-      this.initials = this.user.fName[0] + this.user.lName[0];
-      this.name = this.user.fName + " " + this.user.lName;
-      this.email=this.user.email;
-      this.role=this.user.role[0];
-    }
+  name: "App",
+  data: () => ({
+    user: {},
+    title: "Music Peformance",
+    initials: "",
+    name: "",
+    email: "",
+    role: '',
+  }),
+  async created() {
+    this.resetMenu();
   },
-  logout() {
-    AuthServices.logoutUser(this.user)
-      .then((response) => {
-        console.log(response);
-        Utils.removeItem("user");
-        this.$router.push({ name: "login" });
-        this.$router.go();
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
+  async mounted() {
+    this.resetMenu();
   },
-},
+  computed: {
+    // _link() {
+    //     return "/" + this.selectedRoles.toLowerCase() + "Home/" + this.currentPersonRoleID;
+    // }
+  },
+  methods: {
+    resetMenu() {
+      this.user = null;
+      // ensures that their name gets set properly from store
+      this.user = Utils.getStore("user");
+      if (this.user != null) {
+        this.initials = this.user.fName[0] + this.user.lName[0];
+        this.name = this.user.fName + " " + this.user.lName;
+        this.email = this.user.email;
+        this.role = this.user.role[0];
+      }
+    },
+    logout() {
+      AuthServices.logoutUser(this.user)
+        .then((response) => {
+          console.log(response);
+          Utils.removeItem("user");
+          this.$router.push({ name: "login" });
+          this.$router.go();
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    },
+  },
 };
 </script>
 
