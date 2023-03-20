@@ -2,14 +2,6 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import Login from "./views/Login.vue";
-
-import TutorialsList from "./views/TutorialsList.vue";
-import EditTutorial from "./views/EditTutorial.vue";
-import AddTutorial from "./views/AddTutorial.vue";
-import ViewTutorial from "./views/ViewTutorial.vue";
-import AddLesson from "./views/AddLesson.vue";
-import EditLesson from "./views/EditLesson.vue";
-
 import RoleList from "./views/Role/List";
 import EditRole from "./views/Role/Edit.vue";
 
@@ -27,6 +19,11 @@ import EditInstrument from "./views/instrument/Edit";
 import AddInstrument from "./views/instrument/Add";
 
 import AddCritique from "./views/critique/Add";
+
+import SongList from "./views/Song/List";
+import EditSong from "./views/Song/Edit";
+import AddSong from "./views/Song/Add";
+//import TranslateSong from"./views/Song/TranslateSong";
 
 import AddEvent from "./views/Event/Add";
 import EditEvent from "./views/Event/Edit";
@@ -46,40 +43,15 @@ const router = new Router({
       name: "login",
       component: Login,
     },
-    {
-      path: "/tutorials",
-      name: "tutorials",
-      component: TutorialsList,
-    },
-    {
-      path: "/edit/:id",
-      name: "edit",
-      component: EditTutorial,
-      props: true,
-    },
-    {
-      path: "/add",
-      name: "add",
-      component: AddTutorial,
-    },
-    {
-      path: "/view/:id",
-      name: "view",
-      component: ViewTutorial,
-      props: true,
-    },
-    {
-      path: "/addLesson/:tutorialId",
-      name: "addLesson",
-      component: AddLesson,
-      props: true,
-    },
-    {
-      path: "/editLesson/:tutorialId/:lessonId",
-      name: "editLesson",
-      component: EditLesson,
-      props: true,
-    },
+
+
+
+    // {
+    //   path: "/TranslateSong",
+    //   name: "TranslateSong",
+    //   component: TranslateSong,
+    // },
+
     {
       path: "/Home",
       name: "Home",
@@ -90,7 +62,7 @@ const router = new Router({
       name: "RoleList",
       component: RoleList,
     },
-   
+
     {
       path: "/edit-role/:id",
       name: "EditRole",
@@ -102,7 +74,7 @@ const router = new Router({
       name: "ComposerList",
       component: ComposerList,
     },
-   
+
     {
       path: "/edit-Composer/:id",
       name: "EditComposer",
@@ -119,7 +91,7 @@ const router = new Router({
       name: "InstrumentList",
       component: InstrumentList,
     },
-   
+
     {
       path: "/edit-Instrument/:id",
       name: "EditInstrument",
@@ -131,6 +103,27 @@ const router = new Router({
       name: "AddInstrument",
       component: AddInstrument,
     },
+
+
+    {
+      path: "/SongList",
+      name: "SongList",
+      component: SongList,
+    },
+
+    {
+      path: "/edit-Song/:id",
+      name: "EditSong",
+      component: EditSong,
+      props: true,
+    },
+    {
+      path: "/AddSong",
+      name: "AddSong",
+      component: AddSong,
+    },
+
+
     {
       path: "/AddCritique",
       name: "AddCritique",
@@ -141,7 +134,7 @@ const router = new Router({
       name: "EventSessionList",
       component: EventSessionList,
     },
-   
+
     {
       path: "/edit-EventSession/:id",
       name: "EditEventSession",
