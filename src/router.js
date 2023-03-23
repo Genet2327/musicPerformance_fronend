@@ -10,7 +10,7 @@ import ViewTutorial from "./views/ViewTutorial.vue";
 import AddLesson from "./views/AddLesson.vue";
 import EditLesson from "./views/EditLesson.vue";
 
-//import RecitalSignUp from "./views/RecitalSignup.vue";
+//import RecitalSignUp from "./views/RecitalSignUp.vue";
 
 import RoleList from "./views/Role/List";
 import EditRole from "./views/Role/Edit.vue";
