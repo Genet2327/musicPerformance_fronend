@@ -5,9 +5,12 @@ import Login from "./views/Login.vue";
 import RoleList from "./views/Role/List";
 import EditRole from "./views/Role/Edit.vue";
 
+import SignUp from "./views/SignUp/SignUp";
+
 import ComposerList from "./views/Composer/List";
 import EditComposer from "./views/Composer/Edit";
 import AddComposer from "./views/Composer/Add";
+
 
 import ViewEventSession from "./views/EventSession/view";
 import EditEventSession from "./views/EventSession/Edit";
@@ -135,6 +138,11 @@ const router = new Router({
       component: EventSessionList,
     },
 
+    {
+      path: "/SignUp",
+      name: "SignUp",
+      component: SignUp,
+    },
     {
       path: "/edit-EventSession/:id",
       name: "EditEventSession",
