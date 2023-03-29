@@ -27,17 +27,18 @@
         </v-list-item-icon>
         <v-list-item-title> <v-btn exact :to="{ name: 'ComposerList' }" text>Composer </v-btn></v-list-item-title>
       </v-list-item>
+
       <v-list-item v-show="role == 'ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
         <v-list-item-title> <v-btn exact :to="{ name: 'InstrumentList' }" text>Instrument </v-btn></v-list-item-title>
       </v-list-item>
+
       <v-list-item  link>
         <v-list-item-icon>
           <v-icon>mdi-star</v-icon>
         </v-list-item-icon>
-
         <v-list-item-title><v-btn exact :to="{ name: 'RoleList' }" text>Roles </v-btn></v-list-item-title>
       </v-list-item>
       <v-list-item v-show="role == 'ADMIN'" link>
@@ -60,6 +61,14 @@
         </v-list-item-icon>
         <v-list-item-title> <v-btn exact :to="{ name: 'AddSong' }" text>Song </v-btn></v-list-item-title>
       </v-list-item>
+
+      <v-list-item v-show="role == 'ADMIN'" link>
+        <v-list-item-icon>
+          <v-icon>mdi-account-multiple</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title> <v-btn exact :to="{ name: 'SignUp' }" text>SignUp </v-btn></v-list-item-title>
+      </v-list-item>
+
       <v-list-item link>
         <v-list-item-icon>
           <v-icon @click="logout()">logout</v-icon>
