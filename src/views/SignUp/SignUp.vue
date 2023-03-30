@@ -103,10 +103,14 @@
           ></v-select>
         </v-row>
   
+        <div>
+            <p>{{ message }}</p>
+        </div>
+
         <v-text-field
           v-model="SelectionTitle"
           :error-messages="SelectionTitle"
-          :counter="50"
+          :counter="150"
           label="Selection Title"
           required
           @input="$v.SelectionTitle.$touch()"
@@ -128,10 +132,15 @@
         </v-row>
 
         <div>
-          <label>
-            <input type="checkbox" v-model="isChecked">
-            If the text is in a Foreign Language Check
-          </label>
+          <div>
+    <label>
+      <input type="checkbox" v-model="isChecked">
+      If the text is in a Foreign Language Check
+    </label>
+    <br>
+    <textarea v-if="isChecked" v-model="foreignText" placeholder="Enter foreign text here" 
+    style="width: 1300px; height: 200px;"></textarea>
+  </div>
         </div>
 
         <div>
@@ -146,8 +155,10 @@
 export default {
   data() {
     return {
-      isChecked: false
-    };
+      isChecked: false,
+      message: 'Hello, this is a normal sentence in Vue.js.',
+      foreignText: ''
+    }
   }
 }
 </script>
