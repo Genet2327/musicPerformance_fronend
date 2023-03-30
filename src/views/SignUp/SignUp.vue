@@ -9,6 +9,8 @@
       <br /><br />
       
       <form>
+        
+        
     
         <!-- Select Hearing Date -->
     
@@ -115,12 +117,12 @@
         <v-row>
           <v-col>
             <v-select
-              :disabled="noPrivateInstructor"
-              v-model="selectedPrivateInstructor"
-              :items="PrivateInstructor"
+              :disabled="noComposer"
+              v-model="selectedComposer"
+              :items="Composer"
               item-text="fullName"
               item-value="id"
-              label="Private Instructor"
+              label="Composer"
             ></v-select>
           </v-col>
         </v-row>
