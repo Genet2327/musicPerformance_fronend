@@ -139,7 +139,7 @@
     </label>
     <br>
     <textarea v-if="isChecked" v-model="foreignText" placeholder="Enter foreign text here" 
-    style="width: 1300px; height: 200px;"></textarea>
+    style="width: 1750px; height: 200px;"></textarea>
   </div>
         </div>
 
