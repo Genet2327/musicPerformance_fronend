@@ -104,8 +104,8 @@
         </v-row>
   
         <div>
-            <p>{{ message }}</p>
-        </div>
+    <p>If there is any missing information associated with your composer, accompanist or other important informataion sumbit the infomation by clicking  <a href="https://www.example.com">here</a></p>
+  </div>
 
         <v-text-field
           v-model="SelectionTitle"
@@ -156,7 +156,7 @@ export default {
   data() {
     return {
       isChecked: false,
-      message: 'Hello, this is a normal sentence in Vue.js.',
+     // message: 'If there is any missing information associated with your composer, accompanist or other important informataion sumbit the infomation by clicking ',
       foreignText: ''
     }
   }
