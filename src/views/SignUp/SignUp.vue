@@ -104,7 +104,7 @@
         </v-row>
   
         <div>
-    <p>If there is any missing information associated with your composer, accompanist or other important informataion sumbit the infomation by clicking  <a href="https://www.example.com">here</a></p>
+    <p>If there is any missing information associated with your composer, accompanist or other important informataion please sumbit the infomation by clicking  <a href="https://www.example.com">here</a></p>
   </div>
 
         <v-text-field
@@ -156,7 +156,6 @@ export default {
   data() {
     return {
       isChecked: false,
-     // message: 'If there is any missing information associated with your composer, accompanist or other important informataion sumbit the infomation by clicking ',
       foreignText: ''
     }
   }
