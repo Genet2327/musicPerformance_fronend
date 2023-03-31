@@ -102,9 +102,10 @@
             item-value="id"
           ></v-select>
         </v-row>
+        
   
         <div>
-    <p>If there is any missing information associated with your composer, accompanist or other important informataion please sumbit the infomation by clicking  <a href="https://www.example.com">here</a></p>
+    <p>If there is any missing information associated with your composer, accompanist or other important informataion please sumbit the infomation by clicking  <a href="http://localhost:8081/#/MissingInfo">here</a></p>
   </div>
 
         <v-text-field
@@ -143,9 +144,9 @@
   </div>
         </div>
 
-        <div>
-          <button @click="saveData">Submit</button>
-        </div>
+        <v-col cols="12" class="text-center">
+            <v-btn color="primary">Submit</v-btn>
+          </v-col>
       </form>
     </v-container>
   </div>

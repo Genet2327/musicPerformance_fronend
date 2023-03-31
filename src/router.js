@@ -6,6 +6,7 @@ import RoleList from "./views/Role/List";
 import EditRole from "./views/Role/Edit.vue";
 
 import SignUp from "./views/SignUp/SignUp";
+import MissingInfo from "./views/SignUp/MissingInfo";
 
 import ComposerList from "./views/Composer/List";
 import EditComposer from "./views/Composer/Edit";
@@ -142,6 +143,11 @@ const router = new Router({
       path: "/SignUp",
       name: "SignUp",
       component: SignUp,
+    },
+    {
+      path: "/MissingInfo",
+      name: "MissingInfo",
+      component: MissingInfo,
     },
     {
       path: "/edit-EventSession/:id",
