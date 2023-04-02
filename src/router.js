@@ -28,6 +28,8 @@ import AddSong from "./views/Song/Add";
 import AddEvent from "./views/Event/Add";
 import EditEvent from "./views/Event/Edit";
 
+import PassOrFail from "./views/PassOrFail/PassOrFail";
+
 import Home from "./views/Home/home.vue";
 Vue.use(Router);
 
@@ -117,6 +119,13 @@ const router = new Router({
       component: EditSong,
       props: true,
     },
+
+    {
+      path: "/PassOrFail",
+      name: "PassOrFail",
+      component: PassOrFail,
+    },
+
     {
       path: "/AddSong",
       name: "AddSong",
