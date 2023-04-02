@@ -153,8 +153,6 @@
 </template>
 
 <script>
-
-
 import InstrumentServices from "../../services/Instrument/services";
 
 export default {
@@ -170,16 +168,18 @@ export default {
       message: "Search, Edit or Delete Instruments",
       headers: [
         { text: "Name", value: "name" },
-
         { text: "Actions", value: "actions", sortable: false },
       ],
+      menu: false,
+      date: null,
+      menu2: false,
+      time: null,
     };
   },
   mounted() {
     this.retrieveInstruments();
   },
   methods: {
-
     retrieveInstruments() {
       InstrumentServices.getAll()
         .then((response) => {
@@ -211,4 +211,3 @@ export default {
   },
 };
 </script>
-
