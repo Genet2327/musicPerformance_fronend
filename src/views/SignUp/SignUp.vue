@@ -41,7 +41,7 @@
         <!-- Select Hearing Time -->
   
         <v-menu
-          v-model="menu"
+          v-model="menu2"
           :close-on-content-click="false"
           :nudge-right="40"
           transition="scale-transition"
@@ -50,18 +50,18 @@
         >
           <template v-slot:activator="{ on }">
             <v-text-field
-              v-model="date"
+              v-model="time"
               label="Select a hearing time"
-              prepend-icon="mdi-calendar"
+              prepend-icon="mdi-clock-time-four-outline"
               readonly
               v-on="on"
             ></v-text-field>
           </template>
-          <v-date-picker v-model="date" no-title scrollable>
+          <v-time-picker v-model="time" format="ampm" full-width>
             <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-            <v-btn text color="primary" @click="menu = false">OK</v-btn>
-          </v-date-picker>
+            <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
+            <v-btn text color="primary" @click="menu2 = false">OK</v-btn>
+          </v-time-picker>
         </v-menu>
   
         <!-- Add an accompanist to the performance -->
@@ -96,13 +96,13 @@
         <v-row>
           <v-select
             label="Select Voice or Instrument"
-            v-model="selectedInstrumentId"
+             v-model="Instruments"
             :items="instruments"
-            item-text="instrument"
+            item-text="name"
             item-value="id"
           ></v-select>
         </v-row>
-        
+        <br /><br />
   
         <div>
     <p>If there is any missing information associated with your composer, accompanist or other important informataion please sumbit the infomation by clicking  <a href="http://localhost:8081/#/MissingInfo">here</a></p>
@@ -153,12 +153,62 @@
 </template>
 
 <script>
+
+
+import InstrumentServices from "../../services/Instrument/services";
+
 export default {
+  name: "Instruments-list",
   data() {
     return {
-      isChecked: false,
-      foreignText: ''
-    }
-  }
-}
+      search: "",
+      Instruments: [],
+      currentInstrument: null,
+      currentIndex: -1,
+      name: "",
+      user: {},
+      message: "Search, Edit or Delete Instruments",
+      headers: [
+        { text: "Name", value: "name" },
+
+        { text: "Actions", value: "actions", sortable: false },
+      ],
+    };
+  },
+  mounted() {
+    this.retrieveInstruments();
+  },
+  methods: {
+
+    retrieveInstruments() {
+      InstrumentServices.getAll()
+        .then((response) => {
+          this.Instruments = response.data;
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+    refreshList() {
+      this.retrieveInstruments();
+      this.currentInstrument = null;
+      this.currentIndex = -1;
+    },
+    setActiveInstrument(Instrument, index) {
+      this.currentInstrument = Instrument;
+      this.currentIndex = Instrument ? index : -1;
+    },
+    removeAllInstruments() {
+      InstrumentServices.deleteAll()
+        .then((response) => {
+          console.log(response.data);
+          this.refreshList();
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+  },
+};
 </script>
+
