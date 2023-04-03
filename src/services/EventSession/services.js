@@ -15,6 +15,14 @@ export default {
   create(data) {
     return apiClient.post("/eventSessions", data);
   },
+  createAv(data) {
+    
+    return apiClient.post("/eventSessions/user", data);
+  },
+  getAvalablity(data) {
+    
+    return apiClient.post("/eventSessions/events", data);
+  },
   update(id, data) {
     return apiClient.put(`/eventSessions/${id}`, data);
   },

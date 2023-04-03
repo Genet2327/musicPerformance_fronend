@@ -31,7 +31,17 @@ import AddCritique from "./views/critique/Add";
 import AddEvent from "./views/Event/Add";
 import EditEvent from "./views/Event/Edit";
 
+import Avalablity from "./views/Avalability/List";
+import ViewAvalablity from "./views/Avalability/view";
+import UserAvalablity from "./views/Avalability/Edit";
+
 import Home from "./views/Home/home.vue";
+
+import UserEvent from "./views/UserEvent/List.vue";
+
+import StudentEvent from "./views/StudentEvent/List.vue";
+import ViewStudentEvent from "./views/StudentEvent/view";
+
 Vue.use(Router);
 
 const router = new Router({
@@ -90,7 +100,7 @@ const router = new Router({
       name: "RoleList",
       component: RoleList,
     },
-   
+
     {
       path: "/edit-role/:id",
       name: "EditRole",
@@ -102,7 +112,7 @@ const router = new Router({
       name: "ComposerList",
       component: ComposerList,
     },
-   
+
     {
       path: "/edit-Composer/:id",
       name: "EditComposer",
@@ -119,7 +129,7 @@ const router = new Router({
       name: "InstrumentList",
       component: InstrumentList,
     },
-   
+
     {
       path: "/edit-Instrument/:id",
       name: "EditInstrument",
@@ -141,7 +151,7 @@ const router = new Router({
       name: "EventSessionList",
       component: EventSessionList,
     },
-   
+
     {
       path: "/edit-EventSession/:id",
       name: "EditEventSession",
@@ -170,6 +180,39 @@ const router = new Router({
       path: "/editEvent/:eventSessionId/:eventId",
       name: "EditEvent",
       component: EditEvent,
+      props: true,
+    },
+    {
+      path: "/userEvent",
+      name: "userEvent",
+      component: UserEvent,
+    },
+    {
+      path: "/StudentEvent",
+      name: "StudentEvent",
+      component: StudentEvent,
+    },
+    {
+      path: "/SignUp/:id",
+      name: "ViewStudentEvent",
+      component: ViewStudentEvent,
+      props: true,
+    },
+    {
+      path: "/SignUpAvalability",
+      name: "Avalablity",
+      component: Avalablity,
+    },
+    {
+      path: "/SignUpAvalability/:id",
+      name: "ViewAvalablity",
+      component: ViewAvalablity,
+      props: true,
+    },
+    {
+      path: "/UserAvalablity/:id",
+      name: "UserAvalablity",
+      component: UserAvalablity,
       props: true,
     },
   ],
