@@ -28,7 +28,17 @@ import AddSong from "./views/Song/Add";
 import AddEvent from "./views/Event/Add";
 import EditEvent from "./views/Event/Edit";
 
+import Avalablity from "./views/Avalability/List";
+import ViewAvalablity from "./views/Avalability/view";
+import UserAvalablity from "./views/Avalability/Edit";
+
 import Home from "./views/Home/home.vue";
+
+import UserEvent from "./views/UserEvent/List.vue";
+
+import StudentEvent from "./views/StudentEvent/List.vue";
+import ViewStudentEvent from "./views/StudentEvent/view";
+
 Vue.use(Router);
 
 const router = new Router({
@@ -163,6 +173,39 @@ const router = new Router({
       path: "/editEvent/:eventSessionId/:eventId",
       name: "EditEvent",
       component: EditEvent,
+      props: true,
+    },
+    {
+      path: "/userEvent",
+      name: "userEvent",
+      component: UserEvent,
+    },
+    {
+      path: "/StudentEvent",
+      name: "StudentEvent",
+      component: StudentEvent,
+    },
+    {
+      path: "/SignUp/:id",
+      name: "ViewStudentEvent",
+      component: ViewStudentEvent,
+      props: true,
+    },
+    {
+      path: "/SignUpAvalability",
+      name: "Avalablity",
+      component: Avalablity,
+    },
+    {
+      path: "/SignUpAvalability/:id",
+      name: "ViewAvalablity",
+      component: ViewAvalablity,
+      props: true,
+    },
+    {
+      path: "/UserAvalablity/:id",
+      name: "UserAvalablity",
+      component: UserAvalablity,
       props: true,
     },
   ],
