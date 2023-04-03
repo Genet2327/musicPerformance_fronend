@@ -22,7 +22,7 @@ import InstrumentList from "./views/instrument/List";
 import EditInstrument from "./views/instrument/Edit";
 import AddInstrument from "./views/instrument/Add";
 
-import AddCritique from "./views/critique/Add";
+import AddCritiques from "./views/Critiques/Add";
 
 import SongList from "./views/Song/List";
 import EditSong from "./views/Song/Edit";
@@ -129,9 +129,9 @@ const router = new Router({
 
 
     {
-      path: "/AddCritique",
-      name: "AddCritique",
-      component: AddCritique,
+      path: "/AddCritiques",
+      name: "AddCritiques",
+      component: AddCritiques,
     },
     {
       path: "/EventSessionList",

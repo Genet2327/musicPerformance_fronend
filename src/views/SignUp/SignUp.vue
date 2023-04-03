@@ -10,8 +10,6 @@
       
       <form>
         
-        
-    
         <!-- Select Hearing Date -->
     
         <v-menu
@@ -65,6 +63,7 @@
         </v-menu>
   
         <!-- Add an accompanist to the performance -->
+
         <v-row>
           <v-col>
             <v-select
@@ -79,6 +78,7 @@
         </v-row>
   
         <!-- Add an Private Instructor to the performance -->
+
         <v-row>
           <v-col>
             <v-select
@@ -93,6 +93,7 @@
         </v-row>
   
         <!-- Select the instrument -->
+
         <v-row>
           <v-select
             label="Select Voice or Instrument"
@@ -124,7 +125,7 @@
             <v-select
               :disabled="noComposer"
               v-model="selectedComposer"
-              :items="Composer"
+              :items="Composers"
               item-text="fullName"
               item-value="id"
               label="Composer"
@@ -154,6 +155,7 @@
 
 <script>
 import InstrumentServices from "../../services/Instrument/services";
+import ComposerServices from "../../services/Composer/services";
 
 export default {
   name: "Instruments-list",
@@ -174,10 +176,23 @@ export default {
       date: null,
       menu2: false,
       time: null,
+      isChecked: false,
+      foreignText: '',
+      Composers: [],
+      currentComposer: null,
+      headers2: [
+        { text: "First Name", value: "firstName" },
+        { text: "Last Name", value: "lastName" },
+        { text: "Nationality", value: "nationality" },
+        { text: "Date of Birth", value: "dateOfBirth" },
+        { text: "Date of Death", value: "dateOfDeath" },
+        { text: "Actions", value: "actions", sortable: false },
+      ],
     };
   },
   mounted() {
     this.retrieveInstruments();
+    this.retrieveComposers();
   },
   methods: {
     retrieveInstruments() {
@@ -189,17 +204,42 @@ export default {
           this.message = e.response.data.message;
         });
     },
+    retrieveComposers() {
+      ComposerServices.getAll()
+        .then((response) => {
+          this.Composers = response.data;
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
     refreshList() {
       this.retrieveInstruments();
+      this.retrieveComposers();
       this.currentInstrument = null;
       this.currentIndex = -1;
+      this.currentComposer = null;
     },
     setActiveInstrument(Instrument, index) {
       this.currentInstrument = Instrument;
       this.currentIndex = Instrument ? index : -1;
     },
+    setActiveComposer(Composer, index) {
+      this.currentComposer = Composer;
+      this.currentIndex = Composer ? index : -1;
+    },
     removeAllInstruments() {
       InstrumentServices.deleteAll()
+        .then((response) => {
+          console.log(response.data);
+          this.refreshList();
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+    removeAllComposers() {
+      ComposerServices.deleteAll()
         .then((response) => {
           console.log(response.data);
           this.refreshList();
