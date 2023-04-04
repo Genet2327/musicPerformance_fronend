@@ -1,14 +1,11 @@
 <template>
-
   <v-navigation-drawer
     darek="false"
     color="red darken-4"
     dark
     permanent
-    
     v-show="user != null"
   >
-
     <v-list>
       <v-list-item class="px-2">
         <v-list-item-avatar>
@@ -39,6 +36,7 @@
           </v-btn></v-list-item-title
         >
       </v-list-item>
+
       <v-list-item v-show="role == 'ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
@@ -74,26 +72,29 @@
         >
       </v-list-item>
 
-
-
       <v-list-item v-show="role == 'FACULITY'" link>
-
         <v-list-item-icon>
           <v-icon>mdi-star</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-title> <v-btn exact :to="{ name: 'CritiqueList' }" text>Critiques </v-btn></v-list-item-title>
+        <v-list-item-title>
+          <v-btn exact :to="{ name: 'CritiqueList' }" text
+            >Critiques
+          </v-btn></v-list-item-title
+        >
       </v-list-item>
 
- <v-list-item v-show="role == 'STUDENT'" link>
-      <v-list-item link>
+      <v-list-item v-show="role == 'STUDENT'" link>
         <v-list-item-icon>
           <v-icon>mdi-folder</v-icon>
         </v-list-item-icon>
-        <v-list-item-title> <v-btn exact :to="{ name: 'SongList' }" text>Piece </v-btn></v-list-item-title>
-
-       
+        <v-list-item-title>
+          <v-btn exact :to="{ name: 'SongList' }" text
+            >Piece
+          </v-btn></v-list-item-title
+        >
       </v-list-item>
+
       <v-list-item v-show="role == 'Accompanist'" link>
         <v-list-item-icon>
           <v-icon>mdi-folder</v-icon>
@@ -104,6 +105,7 @@
           </v-btn></v-list-item-title
         >
       </v-list-item>
+
       <v-list-item v-show="role == 'FACULITY'" link>
         <v-list-item-icon>
           <v-icon>mdi-folder</v-icon>
@@ -115,17 +117,12 @@
         >
       </v-list-item>
 
-    
-
-    
-    
       <v-list-item link>
         <v-list-item-icon>
           <v-icon @click="logout()">logout</v-icon>
         </v-list-item-icon>
         <v-list-item-title>Sign Out</v-list-item-title>
       </v-list-item>
-      
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -144,7 +141,7 @@ export default {
     email: "",
     role: "",
     selectedItem: null,
-      icon: 'mdi-menu-down',
+    icon: "mdi-menu-down",
     items: [
       { title: "Click Me", HELO: "HEL" },
       { title: "Click Me", HELO: "HEL" },
@@ -197,12 +194,12 @@ export default {
           this.message = e.response.data.message;
         });
     },
-    
+
     navigate(id) {
       // Navigate to a different page based on the selected item's ID
       // For example, using Vue Router:
-      this.$router.push({ name: 'ViewStudentEvent', params: { id: id }})
-    }
+      this.$router.push({ name: "ViewStudentEvent", params: { id: id } });
+    },
   },
 };
 </script>
