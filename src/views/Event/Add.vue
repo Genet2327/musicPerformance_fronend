@@ -3,8 +3,8 @@
     <v-container>
       <v-toolbar>
         <v-toolbar-title>Event Add</v-toolbar-title>
-        <!-- <v-spacer></v-spacer>
-        <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
+        <v-spacer></v-spacer>
+        <v-toolbar-title>{{this.message}}</v-toolbar-title>
       </v-toolbar>
       <br />
       <h4>{{ message }}</h4>
@@ -47,7 +47,7 @@
           required
         ></v-text-field>
         <v-menu
-          ref="menu"
+          ref="menu2"
           v-model="menu2"
           :close-on-content-click="false"
           :nudge-right="40"
@@ -71,7 +71,7 @@
             v-if="menu2"
             v-model="event.startTime"
             full-width
-            @click:minute="$refs.menu.save(event.startTime)"
+            @click:minute="$refs.menu2.save(event.startTime)"
           ></v-time-picker>
         </v-menu>
         <v-menu

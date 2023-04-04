@@ -2,7 +2,7 @@
   <div>
     <v-container >
       <v-toolbar>
-        <v-toolbar-title>Instrument </v-toolbar-title>
+        <v-toolbar-title>Instrument List</v-toolbar-title>
         <!-- <v-spacer></v-spacer>
             <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
       </v-toolbar>
@@ -73,10 +73,9 @@ export default {
       currentIndex: -1,
       name: "",
       user: {},
-      message: "Search, Edit or Delete Instruments",
+      message: "Search, Edit or Delete",
       headers: [
         { text: "Name", value: "name" },
-
         { text: "Actions", value: "actions", sortable: false },
       ],
     };

@@ -16,10 +16,19 @@ export default {
   updateEvent(eventSessionId, id, data) {
     return apiClient.put(`/eventSessions/${eventSessionId}/events/${id}`, data);
   },
+  update(id, data) {
+    return apiClient.put(`/eventSessions/events/${id}`, data);
+  },
   deleteEvent(eventSessionId, id) {
     return apiClient.delete(`/eventSessions/${eventSessionId}/events/${id}`);
   },
   getAllEvent(eventSessionId) {
     return apiClient.get(`/eventSessions/${eventSessionId}/events`);
   },
+  getAvalableEvent(id) {
+    return apiClient.get(`/eventSessions/Avalablity/${id}`);
+  },
+  deleteAvalability(userId, EventId){
+    return apiClient.delete(`/eventSessions/Avalablity/${userId}/${EventId}`);
+  }
 }
