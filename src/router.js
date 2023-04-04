@@ -18,7 +18,9 @@ import InstrumentList from "./views/instrument/List";
 import EditInstrument from "./views/instrument/Edit";
 import AddInstrument from "./views/instrument/Add";
 
-import AddCritique from "./views/critique/Add";
+import CritiqueList from "./views/Critique/List";
+import EditCritique from "./views/Critique/Edit";
+import AddCritique from "./views/Critique/Add";
 
 import SongList from "./views/Song/List";
 import EditSong from "./views/Song/Edit";
@@ -122,8 +124,18 @@ const router = new Router({
       name: "AddSong",
       component: AddSong,
     },
+    {
+      path: "/CritiqueList",
+      name: "CritiqueList",
+      component: CritiqueList,
+    },
 
-
+    {
+      path: "/edit-Critique/:id",
+      name: "EditCritique",
+      component: EditCritique,
+      props: true,
+    },
     {
       path: "/AddCritique",
       name: "AddCritique",

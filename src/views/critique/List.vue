@@ -92,7 +92,7 @@ import CritiqueServices from "../../services/Critique/services";
     methods: {
       editCritique(Critique) {
         this.$router.push({
-          name: "CritiqueEdit",
+          name: "EditCritique",
           params: { id: Critique.id },
         });
       },

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer darek="false" color="red darken-4" dark permanent expand-on-hover v-show="user != null">
+  <v-navigation-drawer darek="false" color="red darken-4" dark permanent v-show="user != null">
     <v-list>
       <v-list-item class="px-2">
         <v-list-item-avatar>
@@ -47,18 +47,19 @@
 
         <v-list-item-title><v-btn exact :to="{ name: 'EventSessionList' }" text>Event </v-btn></v-list-item-title>
       </v-list-item>
-      <v-list-item v-show="role == 'FACULITY'" link>
+      <v-list-item link>
         <v-list-item-icon>
-          <v-icon>mdi-folder</v-icon>
+          <v-icon>mdi-star</v-icon>
         </v-list-item-icon>
-        <v-list-item-title> <v-btn exact :to="{ name: 'AddCritique' }" text>Critiques </v-btn></v-list-item-title>
+        <v-list-item-title> <v-btn exact :to="{ name: 'CritiqueList' }" text>Critiques </v-btn></v-list-item-title>
       </v-list-item>
+
 
       <v-list-item link>
         <v-list-item-icon>
           <v-icon>mdi-folder</v-icon>
         </v-list-item-icon>
-        <v-list-item-title> <v-btn exact :to="{ name: 'AddSong' }" text>Song </v-btn></v-list-item-title>
+        <v-list-item-title> <v-btn exact :to="{ name: 'SongList' }" text>Piece </v-btn></v-list-item-title>
       </v-list-item>
       <v-list-item link>
         <v-list-item-icon>
