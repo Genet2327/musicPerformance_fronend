@@ -18,9 +18,9 @@ import InstrumentList from "./views/instrument/List";
 import EditInstrument from "./views/instrument/Edit";
 import AddInstrument from "./views/instrument/Add";
 
-import CritiqueList from "./views/Critique/List";
-import EditCritique from "./views/Critique/Edit";
-import AddCritique from "./views/Critique/Add";
+import CritiqueList from "./views/critique/List";
+import EditCritique from "./views/critique/Edit";
+import AddCritique from "./views/critique/Add";
 
 import SongList from "./views/Song/List";
 import EditSong from "./views/Song/Edit";
