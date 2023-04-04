@@ -2,12 +2,12 @@
   <div>
     <v-container>
       <v-toolbar>
-        <v-toolbar-title>Song </v-toolbar-title>
+        <v-toolbar-title>Piece </v-toolbar-title>
       </v-toolbar>
       <br /><br />
       <v-card color="indigo lighten-5">
         <v-card-title>
-          Songs
+          Pieces
           <v-btn class="mx-2" color="success" exact :to="{ name: 'AddSong' }" text>
             Add
           </v-btn>
@@ -39,7 +39,6 @@
 <script>
 import SongServices from "../../services/Song/services";
 import Utils from "@/config/utils.js";
-
 export default {
   name: "Songs-list",
   data() {
@@ -50,10 +49,9 @@ export default {
       currentIndex: -1,
       name: "",
       user: {},
-      message: "Search, Edit or Delete Songs",
+      message: "Search, Edit or Delete Pieces",
       headers: [
         { text: "Name", value: "name" },
-
         { text: "Actions", value: "actions", sortable: false },
       ],
     };
