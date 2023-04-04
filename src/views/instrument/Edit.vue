@@ -2,7 +2,7 @@
     <div>
       <v-container>
         <v-toolbar>
-          <v-toolbar-title>Instrument  Edit</v-toolbar-title>
+          <v-toolbar-title>Instrument Edit</v-toolbar-title>
           <!-- <v-spacer></v-spacer>
             <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
         </v-toolbar>
