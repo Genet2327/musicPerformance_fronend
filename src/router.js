@@ -5,9 +5,13 @@ import Login from "./views/Login.vue";
 import RoleList from "./views/Role/List";
 import EditRole from "./views/Role/Edit.vue";
 
+import SignUp from "./views/SignUp/SignUp";
+import MissingInfo from "./views/SignUp/MissingInfo";
+
 import ComposerList from "./views/Composer/List";
 import EditComposer from "./views/Composer/Edit";
 import AddComposer from "./views/Composer/Add";
+
 
 import ViewEventSession from "./views/EventSession/view";
 import EditEventSession from "./views/EventSession/Edit";
@@ -18,7 +22,7 @@ import InstrumentList from "./views/instrument/List";
 import EditInstrument from "./views/instrument/Edit";
 import AddInstrument from "./views/instrument/Add";
 
-import AddCritique from "./views/critique/Add";
+import AddCritiques from "./views/Critiques/Add";
 
 import SongList from "./views/Song/List";
 import EditSong from "./views/Song/Edit";
@@ -135,9 +139,9 @@ const router = new Router({
 
 
     {
-      path: "/AddCritique",
-      name: "AddCritique",
-      component: AddCritique,
+      path: "/AddCritiques",
+      name: "AddCritiques",
+      component: AddCritiques,
     },
     {
       path: "/EventSessionList",
@@ -145,6 +149,16 @@ const router = new Router({
       component: EventSessionList,
     },
 
+    {
+      path: "/SignUp",
+      name: "SignUp",
+      component: SignUp,
+    },
+    {
+      path: "/MissingInfo",
+      name: "MissingInfo",
+      component: MissingInfo,
+    },
     {
       path: "/edit-EventSession/:id",
       name: "EditEventSession",

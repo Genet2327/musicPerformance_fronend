@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-toolbar>
-        <v-toolbar-title>Add Critique</v-toolbar-title>
+        <v-toolbar-title>Add Critiques</v-toolbar-title>
 
       </v-toolbar>
 
@@ -13,51 +13,51 @@
 
 
       <v-form ref="form" v-model="valid" lazy validation>
-        <v-text-field v-model="critique.department" id="name" :counter="50" label="Department" required>
+        <v-text-field v-model="Critiques.department" id="name" :counter="50" label="Department" required>
         </v-text-field>
       </v-form>
 
 
 
       <v-form ref="form" v-model="valid" lazy validation>
-        <v-text-field v-model="critique.tone" id="name" :counter="50" label=" Tone" required>
+        <v-text-field v-model="Critiques.tone" id="name" :counter="50" label=" Tone" required>
         </v-text-field>
 
       </v-form>
 
       <v-form ref="form" v-model="valid" lazy validation>
-        <v-text-field v-model="critique.acurracy" id="name" :counter="50" label="Accuracy" required>
+        <v-text-field v-model="Critiques.acurracy" id="name" :counter="50" label="Accuracy" required>
         </v-text-field>
       </v-form>
 
 
       <v-form ref="form" v-model="valid" lazy validation>
-        <v-text-field v-model="critique.technique" id="name" :counter="50" label="Technique" required>
+        <v-text-field v-model="Critiques.technique" id="name" :counter="50" label="Technique" required>
         </v-text-field>
       </v-form>
 
       <v-form ref="form" v-model="valid" lazy validation>
-        <v-text-field v-model="critique.interpretation" id="name" :counter="50" label="Interpretation" required>
-        </v-text-field>
-
-      </v-form>
-
-      <v-form ref="form" v-model="valid" lazy validation>
-        <v-text-field v-model="critique.balanceblend" id="name" :counter="50" label="Balance Blend" required>
+        <v-text-field v-model="Critiques.interpretation" id="name" :counter="50" label="Interpretation" required>
         </v-text-field>
 
       </v-form>
 
       <v-form ref="form" v-model="valid" lazy validation>
-        <v-text-field v-model="critique.diction" id="name" :counter="50" label="Diction (vocal)" required>
+        <v-text-field v-model="Critiques.balanceblend" id="name" :counter="50" label="Balance Blend" required>
+        </v-text-field>
+
+      </v-form>
+
+      <v-form ref="form" v-model="valid" lazy validation>
+        <v-text-field v-model="Critiques.diction" id="name" :counter="50" label="Diction (vocal)" required>
         </v-text-field>
       </v-form>
 
       <v-form ref="form" v-model="valid" lazy validation>
-        <v-text-field v-model="critique.performanc" id="name" :counter="70" label="Performance/ Suggestions" required>
+        <v-text-field v-model="Critiques.performanc" id="name" :counter="70" label="Performance/ Suggestions" required>
         </v-text-field>
 
-        <v-btn :disabled="!valid" color="success" class="mr-4" @click="saveCritique()">
+        <v-btn :disabled="!valid" color="success" class="mr-4" @click="saveCritiques()">
           Save
         </v-btn>
 
@@ -68,16 +68,16 @@
 </template>
   
 <script>
-import CritiqueServices from "../../services/Critique/services";
+import CritiquesServices from "../../services/Critiques/services";
 import Utils from "@/config/utils.js";
 
 export default {
-  name: "add-critique",
+  name: "add-Critiques",
   data() {
     return {
       valid: false,
       user: {},
-      critique: {
+      Critiques: {
         id: null,
         department: "",
         tone: "",
@@ -102,25 +102,25 @@ export default {
 
   methods: {
 
-    saveCritique() {
+    saveCritiques() {
       var data = {
-        department: this.critique.department,
-        tone: this.critique.tone,
-        acurracy: this.critique.acurracy,
-        technique: this.critique.technique,
-        interpretation: this.critique.interpretation,
-        balanceblend: this.critique.balanceblend,
-        diction: this.critique.diction,
-        performanc: this.critique.performanc,
+        department: this.Critiques.department,
+        tone: this.Critiques.tone,
+        acurracy: this.Critiques.acurracy,
+        technique: this.Critiques.technique,
+        interpretation: this.Critiques.interpretation,
+        balanceblend: this.Critiques.balanceblend,
+        diction: this.Critiques.diction,
+        performanc: this.Critiques.performanc,
         userId: this.user.userId,
       };
 
       console.log(data);
-      CritiqueServices.create(data)
+      CritiquesServices.create(data)
         .then((response) => {
-          this.critique.id = response.data.id;
+          this.Critiques.id = response.data.id;
           console.log("add " + response.data);
-          this.$router.push({ name: "CritiqueList" });
+          this.$router.push({ name: "CritiquesList" });
         })
         .catch((e) => {
           console.log("add Eroro" + e.response.data.message);
@@ -130,7 +130,7 @@ export default {
     cancel() {
       console.log("add");
 
-      this.$router.push({ name: "CritiqueList" });
+      this.$router.push({ name: "CritiquesList" });
     },
 
 

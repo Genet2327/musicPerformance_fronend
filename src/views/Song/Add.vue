@@ -10,14 +10,35 @@
       <v-form ref="form" v-model="valid" lazy validation>
         <v-text-field v-model="song.name" id="name" :counter="50" label="Song Name" required>
         </v-text-field>
-        <v-text-field v-model="song.lyrics" id="lyrics" :counter="50" label="Layrs" required>
-        </v-text-field>
-        <v-select v-model="sourceLang" :items="itemsLang" item-text="text" filled return-object></v-select>
-        <v-btn :disabled="!valid" color="success" class="mr-4" @click="translateText()">
-          Translate
-        </v-btn>
-        <v-text-field v-model="song.translatedSong" id="translatedSong" :counter="50" label="Translated Song" required>
-        </v-text-field>
+    
+        <div class="translate-app">
+    <div class="input-section">
+      <label for="source-lang">Source Language:</label>
+      <select id="source-lang" v-model="sourceLang">
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <!-- Add more options for other languages as needed -->
+      </select>
+      <textarea v-model="inputText"></textarea>
+    </div>
+    <div class="output-section">
+      <label for="target-lang">Target Language:</label>
+      <select id="target-lang" v-model="targetLang">
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <!-- Add more options for other languages as needed -->
+      </select>
+      <textarea v-model="outputText" readonly></textarea>
+    </div>
+    <v-btn class="mr-4" color="success" @click="translate">Translate</v-btn>
+    <v-btn class="mr-4" color="error" @click="clear">Clear</v-btn>
+        </div>
+
+
+
+        
         <v-btn :disabled="!valid" color="success" class="mr-4" @click="saveSong()">
           Save
         </v-btn>
@@ -26,11 +47,46 @@
     </v-container>
   </div>
 </template>
-  
+<style>
+.translate-app {
+  text-align: center;
+}
+
+.input-section,
+.output-section {
+  display: inline-block;
+  width: 45%;
+  margin: 20px;
+  vertical-align: top;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #eee;
+}
+</style>
 <script>
 import SongServices from "../../services/Song/services";
 import Utils from "@/config/utils.js";
 import axios from "axios";
+
 export default {
   name: "add-song",
   data() {
@@ -45,12 +101,15 @@ export default {
         translatedSong: "",
         language: "",
       },
-      targetLang: "en",
-      sourceLang: "",
+      targetLang: "fr",
+      sourceLang: "en",
+      inputText: "",
+      outputText: "",
       itemsLang: [
         { text: "English", value: "en" },
         { text: "Spanish", value: "es" },
-        { text: "French", value: "fr" }
+        { text: "French", value: "fr" },
+        { text: "Italian", value: "it" }
       ],
       message: "Enter data and click save",
     };
@@ -58,17 +117,15 @@ export default {
   },
   mounted() {
     this.user = Utils.getStore("user");
-
   },
 
   methods: {
     saveSong() {
       var data = {
         name: this.song.name,
-        natranslatedSongme: this.song.name,
         lyrics: this.song.lyrics,
-        language: this.sourceLang.value,
-        translationSong:this.song.translatedSong
+        language: this.sourceLang,
+        translationSong: this.song.translatedSong
       };
       console.log(data);
       SongServices.create(data)
@@ -85,7 +142,7 @@ export default {
     translateText() {
       const url =
         "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" +
-        this.sourceLang.value +
+        this.sourceLang +
         "&tl=" +
         this.targetLang +
         "&dt=t&q=" +
@@ -98,6 +155,28 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    },
+
+    translate() {
+      const url =
+        "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" +
+        this.sourceLang +
+        "&tl=" +
+        this.targetLang +
+        "&dt=t&q=" +
+        encodeURI(this.inputText);
+      axios
+        .get(url)
+        .then((response) => {
+          this.outputText = response.data[0][0][0];
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    clear() {
+      this.inputText = "";
+      this.outputText = "";
     },
 
     cancel() {
@@ -117,5 +196,3 @@ export default {
   },
 };
 </script>
-<style></style>
-  
