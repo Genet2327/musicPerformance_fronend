@@ -3,6 +3,9 @@
 import apiClient from "@/services/services.js";
 
 export default {
+  getOneAllUser(eventId) {
+    return apiClient.get("/avalability/users/" + eventId);
+  },
   getOneByUser(userId, eventId) {
     return apiClient.get("/avalability/user/" + userId + "/event/" + eventId);
   },

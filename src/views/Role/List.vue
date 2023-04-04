@@ -32,24 +32,9 @@
         >
           <template v-slot:[`item.actions`]="{ item }">
             <div>
-              <!-- <v-icon small class="mx-4" @click="ADDRoleForUser(item)">
-                    mdi-pencil
-                  </v-icon> -->
-
-              <v-icon
-               
-                small
-                class="mx-4"
-                @click="editRole(item)"
-              >
+              <v-icon small class="mx-4" @click="editRole(item)">
                 mdi-pencil
               </v-icon>
-              <!-- <v-icon small class="mx-4" @click="viewRole(item)">
-                  mdi-format-list-bulleted-type
-                </v-icon> -->
-              <!-- <v-icon small class="mx-4" @click="deleteRole(item)">
-                  mdi-trash-can
-                </v-icon> -->
             </div>
           </template>
         </v-data-table>

@@ -4,6 +4,7 @@
     color="red darken-4"
     dark
     permanent
+    
     v-show="user != null"
   >
     <v-list>
@@ -44,6 +45,16 @@
         <v-list-item-title>
           <v-btn exact :to="{ name: 'InstrumentList' }" text
             >Instrument
+          </v-btn></v-list-item-title
+        >
+      </v-list-item>
+      <v-list-item v-show="role == 'STUDENT'" link>
+        <v-list-item-icon>
+          <v-icon>mdi-account-multiple</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>
+          <v-btn exact :to="{ name: 'StudentEvent' }" text
+            >Sign up
           </v-btn></v-list-item-title
         >
       </v-list-item>

@@ -1,56 +1,148 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" max-width="500">
-      <v-card>
-        <v-card-title> Edit Data </v-card-title>
-        <v-card-text>
-          <v-form>
-            <v-select
-              :items="avalabilityUsers"
-              item-text="fName"
-              filled
-              return-object
-            ></v-select>
-            <v-select
-              :items="instruments"
-              item-text="name"
-              filled
-              return-object
-            ></v-select>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" @click="saveItem"> Save </v-btn>
-          <v-btn @click="closeDialog"> Close </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
     <v-container>
-      <v-toolbar>
-        <v-toolbar-title>EventSession</v-toolbar-title>
-      </v-toolbar>
-      <br /><br />
-      <v-card color="indigo lighten-5">
-        <v-card-title>
-          UpComing Event Sessions
-          <v-spacer></v-spacer>
+      <v-dialog v-model="dialog" max-width="500">
+        <v-card>
+          <v-card-title class="headline">Item Details</v-card-title>
+          <v-card-text>
+            <div v-if="selectedItem">
+              <p>Date: {{ selectedItem.date }}</p>
+              <p>Room: {{ selectedItem.room }}</p>
+              <p>Start Time: {{ selectedItem.startTime }}</p>
+              <p>End Time: {{ selectedItem.endTime }}</p>
 
+              <!-- <h2>Available Accompanist List</h2>
+              <v-text-field
+                v-model="searchUser"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+              >
+              </v-text-field>
+              <v-data-table
+                :headers="userHeaders"
+                :search="searchUser"
+                :items="users"
+                :items-per-page="50"
+              >
+                <template v-slot:[`item.actions`]="{ item }">
+                  <div>
+                    <v-icon small class="mx-4" @click="selectedUser(item)">
+                      mdi-pencil
+                    </v-icon>
+                  </div>
+                </template>
+              </v-data-table> -->
+              <v-select
+                v-model="signUpData.userId"
+                :items="users"
+                :searchable="true"
+                item-text="fName"
+                item-value="id"
+                label="Select an available accompanist"
+              />
+              <v-select
+                v-model="signUpData.instrumentId"
+                :items="Instruments"
+                :searchable="true"
+                item-text="name"
+                item-value="id"
+                label="Select an instrument"
+              />
+              <v-select
+                v-model="signUpData.composerId"
+                :items="Composers"
+                :searchable="true"
+                item-text="firstName"
+                item-value="id"
+                label="Select an composer"
+              />
+            </div>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="green" class="mr-4" @click="SaveSignUp()">
+              Save
+            </v-btn>
+            <v-btn color="error" @click="dialog = false">Close</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-toolbar>
+        <v-toolbar-title> {{ eventSession.type }} </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-title>{{ this.message }}</v-toolbar-title>
+      </v-toolbar>
+      <br />
+      <v-card>
+        <v-card-title>
+          Upcoming event
+          <!-- <v-btn class="mx-2" color="success" @click="ViewAvalability()"
+            >View</v-btn
+          > -->
+          <v-spacer></v-spacer>
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
             label="Search"
             single-line
             hide-details
-          >
-          </v-text-field>
+            class="mx-4"
+          ></v-text-field>
+        </v-card-title>
+        <v-card-text>
+          <b>{{ message }}</b>
+        </v-card-text>
+        <v-data-table :headers="headers" :items="filterItems" :search="search">
+          <template v-slot:body="{ items }">
+            <tbody>
+              <tr v-for="(item, index) in items" :key="index">
+                <td>{{ formatDate(item.date) }}</td>
+                <td>{{ item.room }}</td>
+                <td>{{ item.startTime }}</td>
+                <td>{{ item.startTime }}</td>
+                <td>
+                  <!-- <v-icon
+                    :color="item.isSelected ? 'green' : 'green'"
+                    @click="UpdateEvent(item)"
+                  >
+                    {{ item.isSelected ? "mdi-check" : "mdi-close" }}
+                  </v-icon> -->
+                  <v-btn color="green" class="mr-4" @click="UpdateEvent(item)">
+                    Sign Up
+                  </v-btn>
+                </td>
+              </tr>
+            </tbody>
+          </template>
+        </v-data-table>
+      </v-card>
+      <br />
+      <br />
+
+      <v-card>
+        <v-card-title>
+          Past event
+          <!-- <v-btn class="mx-2" color="success" @click="ViewAvalability()"
+            >View</v-btn
+          > -->
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+            class="mx-4"
+          ></v-text-field>
         </v-card-title>
         <v-card-text>
           <b>{{ message }}</b>
         </v-card-text>
         <v-data-table
           :headers="headers"
-          :items="filterItems"
-          :group-by="'userId'"
+          :items="filterOldItems"
+          :search="search"
         >
           <template v-slot:body="{ items }">
             <tbody>
@@ -59,147 +151,19 @@
                 <td>{{ item.room }}</td>
                 <td>{{ item.startTime }}</td>
                 <td>{{ item.startTime }}</td>
-                <td>
-                  <v-chip
-                    v-if="item.isApproved === 0"
-                    :color="getColor(item.isApproved)"
-                    dark
-                  >
-                    Pending
-                  </v-chip>
-                  <v-chip
-                    v-if="item.isApproved === 1"
-                    :color="getColor(item.isApproved)"
-                    dark
-                  >
-                    Approved
-                  </v-chip>
-                  <v-chip
-                    v-if="item.isApproved === 2"
-                    :color="getColor(item.isApproved)"
-                    dark
-                  >
-                    Rejected
-                  </v-chip>
-                </td>
-                <td>
-                  <v-icon
-                    :color="!item.isSelected ? 'green' : 'red'"
-                    @click="editItem(item)"
-                  >
-                    {{ !item.isSelected ? "mdi-check" : "mdi-close" }}
+                <!-- <td>
+                  <v-icon :color="item.isSelected ? 'green' : 'red'">
+                    {{ item.isSelected ? "mdi-check" : "mdi-close" }}
                   </v-icon>
-                </td>
-              </tr>
-            </tbody>
-          </template>
-        </v-data-table>
-      </v-card>
-    </v-container>
+                </td> -->
 
-    <v-container>
-      <v-card color="indigo lighten-5">
-        <v-card-title>
-          Event Sessions
-          <v-spacer></v-spacer>
-        </v-card-title>
-
-        <v-data-table
-          :headers="headers"
-          :items="filterSelecteditems"
-          :group-by="'userId'"
-        >
-          <template v-slot:body="{ items }">
-            <tbody>
-              <tr v-for="(item, index) in items" :key="index">
-                <td>{{ formatDate(item.date) }}</td>
-                <td>{{ item.room }}</td>
-                <td>{{ item.startTime }}</td>
-                <td>{{ item.startTime }}</td>
                 <td>
-                  <v-chip
-                    v-if="item.isApproved === 0"
-                    :color="getColor(item.isApproved)"
-                    dark
-                  >
-                    Pending
+                  <v-chip v-if="item.isSelected === true" :color="'green'" dark>
+                    Attend
                   </v-chip>
-                  <v-chip
-                    v-if="item.isApproved === 1"
-                    :color="getColor(item.isApproved)"
-                    dark
-                  >
-                    Approved
+                  <v-chip v-if="item.isSelected === false" :color="'red'" dark>
+                    Did not Attend
                   </v-chip>
-                  <v-chip
-                    v-if="item.isApproved === 2"
-                    :color="getColor(item.isApproved)"
-                    dark
-                  >
-                    Rejected
-                  </v-chip>
-                </td>
-                <td v-if="item.isApproved === 0">
-                  <v-icon
-                    :color="!item.isSelected ? 'green' : 'red'"
-                    @click="editItem(item)"
-                  >
-                    {{ !item.isSelected ? "mdi-check" : "mdi-close" }}
-                  </v-icon>
-                </td>
-              </tr>
-            </tbody>
-          </template>
-        </v-data-table>
-      </v-card>
-    </v-container>
-
-    <v-container>
-      <v-card color="indigo lighten-5">
-        <v-card-title>
-          Past Event Sessions
-          <v-spacer></v-spacer>
-        </v-card-title>
-
-        <v-data-table
-          :headers="headers"
-          :items="pastItems"
-          :group-by="'userId'"
-        >
-          <template v-slot:body="{ items }">
-            <tbody>
-              <tr v-for="(item, index) in items" :key="index">
-                <td>{{ formatDate(item.date) }}</td>
-                <td>{{ item.room }}</td>
-                <td>{{ item.startTime }}</td>
-                <td>{{ item.startTime }}</td>
-                <td>
-                  <v-chip
-                    v-if="item.isApproved === 2"
-                    :color="getColor(item.isApproved)"
-                    dark
-                  >
-                    Approved
-                  </v-chip>
-                  <v-chip
-                    v-if="item.isApproved === 1"
-                    :color="getColor(item.isApproved)"
-                    dark
-                  >
-                    Pending
-                  </v-chip>
-                  <v-chip
-                    v-if="item.isApproved === 3"
-                    :color="getColor(item.isApproved)"
-                    dark
-                  >
-                    Rejected
-                  </v-chip>
-                </td>
-                <td v-if="item.isApproved === 1">
-                  <v-icon :color="!item.isSelected ? 'green' : 'red'">
-                    {{ !item.isSelected ? "mdi-check" : "mdi-close" }}
-                  </v-icon>
                 </td>
               </tr>
             </tbody>
@@ -209,66 +173,140 @@
     </v-container>
   </div>
 </template>
-
 <script>
-import EventServices from "../../services/Event/services";
-import SignUp from "../../services/SignUp/services";
-import InstrumentServices from "../../services/Instrument/services";
 import EventSessionServices from "../../services/EventSession/services";
-import StudentEventServices from "../../services/StudentEvent/services";
-import moment from "moment";
+// import EventServices from "../../services/Event/services";
+import AvalabilityServices from "../../services/Avalability/services";
 import Utils from "@/config/utils.js";
+import moment from "moment";
+import StudentEventServices from "../../services/StudentEvent/services";
+import InstrumentServices from "../../services/Instrument/services";
+import ComposerServices from "../../services/Composer/services";
 
 export default {
-  name: "EventSessions-list",
+  name: "view-eventSession",
+  props: ["id"],
   data() {
     return {
-      dialog: false,
       search: "",
-      items: [],
-      pastItems: [],
-      upComingitems: [],
-      EventSessions: [],
-      instruments: [],
-      avalabilityUsers: [],
-      currentEventSession: null,
-      currentIndex: -1,
-      type: "",
-      durationSession: "",
+      searchUser: "",
+      signUpData: {},
+      selectedUserValue: [],
       user: {},
-      message: "Search, Edit or Delete Event Sessions",
+      users: [],
+      eventSession: {},
+      items: [],
+      events: [],
+      Composers: [],
+      userAvalablity: [],
+      Instruments: [],
+      eventsOld: [],
+      message: "",
+      mess: "",
+      dialog: false,
+      userHeaders: [
+        { text: "First Name", value: "fName" },
+        { text: "Last Name", value: "lName" },
+        { text: "Actions", value: "actions", sortable: false },
+      ],
       headers: [
         { text: "Date", value: "date" },
         { text: "Room", value: "room" },
-        { text: "Start Time", value: "startTime" },
+        { text: "Start time", value: "startTime" },
         { text: "End Time", value: "endTime" },
-        { text: "Approval Status", value: "isApproved" },
-        { text: "Status", value: "isSelected" },
+        { text: "Actions", value: "actions", sortable: false },
       ],
-      editedItem: {},
     };
   },
   mounted() {
-    this.user = Utils.getStore("user");
-    this.retrieveStudentEvent();
     this.retrieveEvents();
+    this.retrieveEventSessionServices();
+    this.user = Utils.getStore("user");
+    this.retrieveInstruments();
+    this.retrieveComposers();
   },
   computed: {
-    filterSelecteditems() {
-      return this.items.filter(
-        (item) =>
-          (item.isApproved === 1 || item.isApproved === 0) &&
-          item.isSelected === true &&
-          item.studentId === this.user.userId
-      );
+    filterOldItems() {
+      const current = new Date();
+      var localTime = moment(current).format("YYYY-MM-DD"); // store localTime
+      var proposedDate = localTime + "T00:00:00.000Z";
+      return this.events.filter((item) => item.date < proposedDate);
     },
     filterItems() {
-      return this.items.filter(
-        (item) => item.isSelected === false && item.studentId === ""
-      );
+      const current = new Date();
+      var localTime = moment(current).format("YYYY-MM-DD"); // store localTime
+      var proposedDate = localTime + "T00:00:00.000Z";
+
+      return this.events.filter((item) => item.date >= proposedDate);
     },
   },
   methods: {
+    selectedUser(item) {
+      this.selectedUserValue = item.id;
+    },
+    retrieveAllUsers(id) {
+      AvalabilityServices.getOneAllUser(id)
+        .then((response) => {
+          this.users = response.data;
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+    formatDate(datetime) {
+      const date = new Date(datetime);
+      return date.toISOString().split("T")[0];
+    },
+    AddEvent(event) {
+      var data = {
+        eventId: event.id,
+        userId: this.user.userId,
+        isSelected: true,
+      };
+
+      AvalabilityServices.create(data)
+        .then((response) => {
+          this.$router.go(this.$router.currentRoute);
+          console.log("add " + response.data);
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+
+      event.isSelected = !event.isSelected;
+    },
+    SaveSignUp() {
+      //this.signUpData
+      this.dialog = false;
+    },
+    openDialog(item) {
+      this.selectedItem = item;
+      this.dialog = true;
+    },
+    UpdateEvent(item) {
+      this.signUpData.eventId = item.id;
+      this.retrieveAllUsers(item.id);
+      this.openDialog(item);
+    },
+    retrieveInstruments() {
+      InstrumentServices.getAll()
+        .then((response) => {
+          this.Instruments = response.data;
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+    retrieveComposers() {
+      ComposerServices.getAll()
+        .then((response) => {
+          this.Composers = response.data;
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+
     retrieveEvents() {
       StudentEventServices.getAll()
         .then((response) => {
@@ -279,8 +317,11 @@ export default {
           for (let index = 0; index < fillterDatas.length; index++) {
             let fillterData = fillterDatas[index];
 
+            if (fillterData.avalability.length === 0) continue;
+
             let avalabilitys = fillterData.avalability.filter(
-              (i) => i.eventId == fillterData.id && i.userId !== this.user.userId
+              (i) =>
+                i.eventId == fillterData.id && i.userId !== this.user.userId
             );
 
             this.events.push({
@@ -300,83 +341,21 @@ export default {
           this.message = e.response.data.message;
         });
     },
-    retrieveStudentEvent() {
-      StudentEventServices.getAll()
-        .then((response) => {
-          var events = response.data;
-          const current = new Date();
-          var localTime = moment(current).format("YYYY-MM-DD");
 
-          for (let index = 0; index < events.length; index++) {
-            const event = events[index];
-            const date = this.formatDate(event.date);
-            if (event.avalability.length > 0) {
-              if (localTime <= date) this.items.push(event);
-              else this.pastItems.push(event);
-            }
-          }
+    retrieveEventSessionServices() {
+      EventSessionServices.get(this.id)
+        .then((response) => {
+          this.eventSession = response.data;
         })
         .catch((e) => {
           this.message = e.response.data.message;
         });
     },
-    updateEvent() {
-      var data = {
-        date: this.editedItem.date,
-        room: this.editedItem.room,
-        startTime: this.editedItem.startTime,
-        endTime: this.editedItem.endTime,
-        isApproved: this.editedItem.isApproved === 0 ? "" : 0,
-        isSelected: !this.editedItem.isSelected,
-        studentId: this.user.userId,
-      };
-
-      EventServices.update(this.editedItem.id, data)
-        .then(() => {})
-        .catch((e) => {
-          this.message = e.response.data.message;
-        });
-
-      var signUpdata = {
-        userId: this.user.userId,
-      };
-      SignUp.create(signUpdata)
-        .then(() => {})
-        .catch((e) => {
-          this.message = e.response.data.message;
-        });
-    },
-    retrieveUserEvent(eventId) {
-      StudentEventServices.getUserAll(eventId)
-        .then((response) => {
-          this.avalabilityUsers = response.data;
-        })
-        .catch((e) => {
-          this.message = e.response.data.message;
-        });
-    },
-    retrieveInstruments() {
-      InstrumentServices.getAll()
-        .then((response) => {
-          this.instruments = response.data;
-        })
-        .catch((e) => {
-          this.message = e.response.data.message;
-        });
-    },
-    editItem(item) {
-      this.retrieveUserEvent(item.id);
-      this.retrieveInstruments();
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-    saveItem() {
-      this.dialog = false;
-      this.updateEvent();
-      this.$router.go(this.$router.currentRoute);
-    },
-    closeDialog() {
-      this.dialog = false;
+    ViewAvalability() {
+      this.$router.push({
+        name: "UserAvalablity",
+        params: { id: this.user.userId },
+      });
     },
     toggleStatus(item) {
       item.isSelected = !item.isSelected;
@@ -386,34 +365,8 @@ export default {
       else if (item === false) return "red";
       else return "yellow";
     },
-    formatDate(datetime) {
-      const date = new Date(datetime);
-      return date.toISOString().split("T")[0];
-    },
-    viewEventSession(EventSession) {
-      this.$router.push({
-        name: "ViewStudentEvent",
-        params: { id: EventSession.id },
-      });
-    },
-    retrieveEventSessions() {
-      EventSessionServices.getAll()
-        .then((response) => {
-          this.EventSessions = response.data;
-        })
-        .catch((e) => {
-          this.message = e.response.data.message;
-        });
-    },
-    refreshList() {
-      this.retrieveEventSessions();
-      this.currentEventSession = null;
-      this.currentIndex = -1;
-    },
-    setActiveEventSession(EventSession, index) {
-      this.currentEventSession = EventSession;
-      this.currentIndex = EventSession ? index : -1;
-    },
   },
 };
 </script>
+
+<style></style>
