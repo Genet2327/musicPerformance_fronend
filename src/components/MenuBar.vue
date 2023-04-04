@@ -47,6 +47,7 @@
           </v-btn></v-list-item-title
         >
       </v-list-item>
+
       <v-list-item v-show="role == 'ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-star</v-icon>
@@ -54,10 +55,11 @@
 
         <v-list-item-title
           ><v-btn exact :to="{ name: 'RoleList' }" text
-            >Roles
+            >Users
           </v-btn></v-list-item-title
         >
       </v-list-item>
+
       <v-list-item v-show="role == 'ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-star</v-icon>
@@ -97,6 +99,17 @@
         <v-list-item-title>
           <v-btn exact :to="{ name: 'Avalablity' }" text
             >Sign up Avalablity
+          </v-btn></v-list-item-title
+        >
+      </v-list-item>
+
+      <v-list-item v-show="role == 'STUDENT'" link>
+        <v-list-item-icon>
+          <v-icon>mdi-folder</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>
+          <v-btn exact :to="{ name: 'AddSong' }" text
+            >Add Song
           </v-btn></v-list-item-title
         >
       </v-list-item>
