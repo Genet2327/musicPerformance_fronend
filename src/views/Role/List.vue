@@ -3,8 +3,6 @@
     <v-container>
       <v-toolbar>
         <v-toolbar-title>Role!</v-toolbar-title>
-        <!-- <v-spacer></v-spacer>
-            <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
       </v-toolbar>
       <br /><br />
       <v-card>

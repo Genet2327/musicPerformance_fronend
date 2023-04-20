@@ -8,7 +8,7 @@
         <h4>{{ message }}</h4>
         <br />
         <v-form ref="form" v-model="valid" lazy validation>
-          <v-text-field v-model="song.name" id="firstName" :counter="50" label="Piece Name" required>
+          <v-text-field v-model="song.title" id="firstName" :counter="50" label="Piece Name" required>
           </v-text-field>
           <v-btn :disabled="!valid" color="success" class="mr-4" @click="updateSong()">
             Save
@@ -43,7 +43,7 @@
       },
       updateSong() {
         var data = {
-          name: this.song.name,
+          title: this.song.title,
         };
         SongServices.update(this.id, data)
           .then((response) => {

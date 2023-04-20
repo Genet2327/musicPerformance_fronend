@@ -4,7 +4,7 @@
       <v-toolbar>
         <v-toolbar-title>Home</v-toolbar-title>
         <!-- <v-spacer></v-spacer>
-            <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
+              <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
       </v-toolbar>
       <br /><br />
       <v-container>
@@ -12,28 +12,39 @@
           <v-col
             v-for="(session, index) in EventSessions"
             :key="index"
-            cols="12"
-            md="4"
+            cols="9"
           >
             <v-card color="#EDE7F6">
               <v-card-text>
                 {{ session.type }}
               </v-card-text>
               <v-card-actions>
-                <v-btn @click="viewEventSession(session)">Sign up</v-btn>
-                <v-btn @click="viewSignUpEvent(session)">Change </v-btn>
-                <v-btn @click="viewCritiquesStudent(session)">Critiques</v-btn>
+                <v-btn @click="CreateCritique(session)">Create Critique</v-btn>
+                <v-btn @click="ViewCritique(session)">view Critique</v-btn>
+                <v-btn @click="Avalablity(session)">sign UP  Avalablity</v-btn>
+                
+                <v-btn
+                  v-show="session.type == 'jury'"
+                  @click="CreateCritique(session)"
+                  >Set level</v-btn
+                >
+                <v-btn
+                  v-show="session.type == 'jury'"
+                  @click="CreateCritique(session)"
+                  >Print Critique</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-col>
-
-          <v-card color="#EDE7F6">
-            <v-card-text> Other </v-card-text>
-            <v-card-actions>
-              <v-btn @click="Repertoire()">My Repertoire</v-btn>
-              <v-btn @click="vocal()">Vocal Level Details</v-btn>
-            </v-card-actions>
-          </v-card>
+          <v-col cols="9">
+            <v-card color="#EDE7F6">
+              <v-card-text> Student </v-card-text>
+              <v-card-actions>
+                <v-btn @click="Repertoire()">Student Repertoire Listing</v-btn>
+                <v-btn @click="vocal()">Vocal Level Details</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
         </v-row>
       </v-container>
     </v-container>
@@ -59,7 +70,6 @@ export default {
       message: "Search, Edit or Delete EventSessions",
       headers: [
         { text: "Name", value: "type" },
-
         { text: "Duration Session", value: "durationSession", sortable: false },
         { text: "Actions", value: "actions", sortable: false },
       ],
@@ -70,29 +80,25 @@ export default {
     this.retrieveEventSessions();
   },
   methods: {
-    viewEventSession(EventSession) {
+    CreateCritique(EventSession) {
       this.$router.push({
-        name: "ViewStudentEvent",
+        name: "CritiqueList",
         params: { id: EventSession.id },
       });
     },
-    viewSignUpEvent(EventSession) {
+    ViewCritique(EventSession) {
       this.$router.push({
-        name: "EditEventSignUP",
+        name: "ViewListCritique",
         params: { id: EventSession.id },
       });
     },
-    viewCritiquesStudent(EventSession) {
+    Avalablity(EventSession) {
       this.$router.push({
-        name: "CritiquesStudent",
+        name: "ViewAvalablity",
         params: { id: EventSession.id },
       });
     },
-    Repertoire() {
-      this.$router.push({
-        name: "Repertoire",
-      });
-    },
+    
     retrieveEventSessions() {
       EventSessionServices.getAll()
         .then((response) => {

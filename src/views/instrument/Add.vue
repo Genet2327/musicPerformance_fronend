@@ -15,8 +15,7 @@
           id="name"
           :counter="50"
           label=" Name"
-          required
-        >
+          required        >
         </v-text-field>
 
         <v-btn
@@ -54,7 +53,6 @@ export default {
   mounted() {
     this.user = Utils.getStore("user");
   },
-
   methods: {
     saveInstrument() {
       var data = {

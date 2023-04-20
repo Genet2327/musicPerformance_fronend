@@ -1,5 +1,22 @@
 <template>
   <div>
+    <div>
+      <v-dialog v-model="showConfirmDialog">
+        <v-card>
+          <v-card-title class="headline"> Confirm Deletion </v-card-title>
+          <v-card-text>
+            Are you sure you want to delete this item?
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="red" text @click="showConfirmDialog = false">
+              Cancel
+            </v-btn>
+            <v-btn color="green" text @click="confirmDelete"> Delete </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+
     <v-container>
       <v-toolbar>
         <v-toolbar-title> {{ eventSession.type }} </v-toolbar-title>
@@ -10,9 +27,6 @@
       <v-card>
         <v-card-title>
           Upcoming event
-          <!-- <v-btn class="mx-2" color="success" @click="ViewAvalability()"
-            >View</v-btn
-          > -->
           <v-spacer></v-spacer>
           <v-text-field
             v-model="search"
@@ -35,9 +49,12 @@
                 <td>{{ item.startTime }}</td>
                 <td>{{ item.startTime }}</td>
                 <td>
-                  <v-btn color="green" class="mr-4" @click="UpdateEvent(item)">
-                    select
-                  </v-btn>
+                  <v-icon small class="mx-4" @click="UpdateEvent(item)">
+                    mdi-pencil
+                  </v-icon>
+                  <v-icon small class="mx-4" @click="showConfirmDialog = true">
+                    mdi-trash-can
+                  </v-icon>
                 </td>
               </tr>
             </tbody>
@@ -70,7 +87,8 @@ export default {
       eventSession: {},
       items: [],
       events: [],
-
+      showConfirmDialog: false,
+      item: "test",
       eventsOld: [],
       message: "",
       mess: "",
@@ -85,8 +103,8 @@ export default {
     };
   },
   mounted() {
-    this.retrieveEventServices();
     this.user = Utils.getStore("user");
+    this.retrieveEventServices();
   },
   computed: {
     filterOldItems() {
@@ -111,13 +129,34 @@ export default {
 
     UpdateEvent(item) {
       this.$router.push({
+        name: "ChangesignUpEvent",
+        params: { id: item.signUpId },
+      });
+    },
+    confirmDelete() {
+      this.showConfirmDialog = false;
+
+      var dataEvent = {
+        signUpId: null,
+      };
+      EventServices.update(this.id, dataEvent)
+        .then((response) => {
+          this.Event = response.data;
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+      this.$router.go(this.$router.currentRoute);
+    },
+    Delete(item) {
+      this.$router.push({
         name: "signUpEvent",
         params: { id: item.id },
       });
     },
 
     retrieveEventServices() {
-      EventServices.getSignUpEvent(this.id)
+      EventServices.getUserSignUpEvent(this.id, this.user.userId)
         .then((response) => {
           this.events = response.data;
         })

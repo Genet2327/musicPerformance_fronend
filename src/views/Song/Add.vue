@@ -8,7 +8,7 @@
         <h4>{{ message }}</h4>
         <br />
         <v-form ref="form" v-model="valid" lazy validation>
-          <v-text-field v-model="song.name" id="name" :counter="50" label="Piece Name" required>
+          <v-text-field v-model="song.title" id="name" :counter="50" label="Piece Name" required>
           </v-text-field>
       
           <div class="translate-app">
@@ -95,7 +95,7 @@
         user: {},
         song: {
           id: null,
-          name: "",
+          title: "",
           lyrics: "",
           translatedSong: "",
           language: "",
@@ -120,7 +120,7 @@
     methods: {
       saveSong() {
         var data = {
-          name: this.song.name,
+          title: this.song.title,
           lyrics: this.song.lyrics,
           language: this.sourceLang,
           translationSong: this.song.translatedSong
@@ -179,15 +179,7 @@
         console.log("add tetstststts");
         this.$router.push({ name: "SongList" });
       },
-      retrieveInstruments() {
-        SongServices.getAll()
-          .then((response) => {
-            this.songs = response.data;
-          })
-          .catch((e) => {
-            this.message = e.response.data.message;
-          });
-      },
+     
     },
   };
   </script>

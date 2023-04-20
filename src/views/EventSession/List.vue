@@ -77,7 +77,7 @@ export default {
       message: "Search, Edit or Delete Event Sessions",
       headers: [
         { text: "Name", value: "type" },
-        { text: "Duration Session", value: "durationSession", sortable: false },
+      
         { text: "Actions", value: "actions", sortable: false },
       ],
     };

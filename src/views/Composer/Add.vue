@@ -57,7 +57,12 @@
           <v-date-picker v-model="composer.dateOfBirth" no-title scrollable>
             <v-spacer></v-spacer>
             <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-            <v-btn text color="primary" @click="$refs.menu.save(composer.dateOfBirth)">OK</v-btn>
+            <v-btn
+              text
+              color="primary"
+              @click="$refs.menu.save(composer.dateOfBirth)"
+              >OK</v-btn
+            >
           </v-date-picker>
         </v-menu>
         <v-menu
@@ -82,10 +87,15 @@
           <v-date-picker v-model="composer.dateOfDeath" no-title scrollable>
             <v-spacer></v-spacer>
             <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
-            <v-btn text color="primary" @click="$refs.menu1.save(composer.dateOfDeath)">OK</v-btn>
+            <v-btn
+              text
+              color="primary"
+              @click="$refs.menu1.save(composer.dateOfDeath)"
+              >OK</v-btn
+            >
           </v-date-picker>
         </v-menu>
-        
+
         <v-btn
           :disabled="!valid"
           color="success"
@@ -120,7 +130,6 @@ export default {
         nationality: "",
         dateOfBirth: new Date().toISOString().substr(0, 10),
         dateOfDeath: new Date().toISOString().substr(0, 10),
-       
       },
       message: "Enter data and click save",
     };
@@ -134,10 +143,9 @@ export default {
       var data = {
         firstName: this.composer.firstName,
         lastName: this.composer.lastName,
-        nationality : this.composer.nationality ,
+        nationality: this.composer.nationality,
         dateOfBirth: this.composer.dateOfBirth,
         dateOfDeath: this.composer.dateOfDeath,
-       
       };
 
       console.log(data);

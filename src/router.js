@@ -22,6 +22,9 @@ import CritiqueList from "./views/critique/List";
 import EditCritique from "./views/critique/Edit";
 import AddCritique from "./views/critique/Add";
 
+import ViewListCritique from "./views/critique/ViewList";
+import ViewCritique from "./views/critique/View";
+
 import SongList from "./views/Song/List";
 import EditSong from "./views/Song/Edit";
 import AddSong from "./views/Song/Add";
@@ -40,7 +43,16 @@ import UserEvent from "./views/UserEvent/List.vue";
 
 import StudentEvent from "./views/StudentEvent/List.vue";
 import ViewStudentEvent from "./views/StudentEvent/view";
+import signUpEvent from "./views/StudentEvent/signUp";
+import EditEventSignUP from "./views/StudentEvent/Edit";
+import ChangesignUpEvent from "./views/StudentEvent/change.vue";
 
+import CritiquesStudent from "./views/StudentEvent/critiques.vue";
+import ViewCritiques from "./views/StudentEvent/ViewCritiques";
+
+import faculityHome from "./views/Faculty/home";
+import Repertoire from "./views/StudentEvent/Repertoire";
+import userStudent from "./views/Student/Edit";
 Vue.use(Router);
 
 const router = new Router({
@@ -56,14 +68,33 @@ const router = new Router({
       component: Login,
     },
 
-
-
+    {
+      path: "/critiques-student/:id",
+      name: "CritiquesStudent",
+      component: CritiquesStudent,
+      props: true,
+    },
+    {
+      path: "/critiques-view/:id",
+      name: "ViewCritiques",
+      component: ViewCritiques,
+      props: true,
+    },
+    {
+      path: "/Repertoire/",
+      name: "Repertoire",
+      component: Repertoire,
+    },
     // {
     //   path: "/TranslateSong",
     //   name: "TranslateSong",
     //   component: TranslateSong,
     // },
-
+    {
+      path: "/faculityHome",
+      name: "faculityHome",
+      component: faculityHome,
+    },
     {
       path: "/Home",
       name: "Home",
@@ -116,7 +147,6 @@ const router = new Router({
       component: AddInstrument,
     },
 
-
     {
       path: "/SongList",
       name: "SongList",
@@ -135,9 +165,10 @@ const router = new Router({
       component: AddSong,
     },
     {
-      path: "/CritiqueList",
+      path: "/CritiqueList/:id",
       name: "CritiqueList",
       component: CritiqueList,
+      props: true,
     },
 
     {
@@ -146,6 +177,21 @@ const router = new Router({
       component: EditCritique,
       props: true,
     },
+
+    {
+      path: "/ViewCritique/:id",
+      name: "ViewCritique",
+      component: ViewCritique,
+      props: true,
+    },
+
+    {
+      path: "/view-list-critique/:id",
+      name: "ViewListCritique",
+      component: ViewListCritique,
+      props: true,
+    },
+
     {
       path: "/AddCritique",
       name: "AddCritique",
@@ -219,6 +265,29 @@ const router = new Router({
       name: "UserAvalablity",
       component: UserAvalablity,
       props: true,
+    },
+    {
+      path: "/signUpEvent/:id",
+      name: "signUpEvent",
+      component: signUpEvent,
+      props: true,
+    },
+    {
+      path: "/EditsignUpEvent/:id/",
+      name: "EditEventSignUP",
+      component: EditEventSignUP,
+      props: true,
+    },
+    {
+      path: "/ChangesignUpEvent/:id",
+      name: "ChangesignUpEvent",
+      component: ChangesignUpEvent,
+      props: true,
+    },
+    {
+      path: "/userStudent",
+      name: "userStudent",
+      component: userStudent,
     },
   ],
 });

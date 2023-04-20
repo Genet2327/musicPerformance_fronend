@@ -4,7 +4,6 @@
     color="red darken-4"
     dark
     permanent
-    
     v-show="user != null"
   >
     <v-list>
@@ -27,6 +26,27 @@
     <v-divider></v-divider>
 
     <v-list nav dense>
+      <v-list-item v-show="role == 'STUDENT'" link>
+        <v-list-item-icon>
+          <v-icon>mdi-account-multiple</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>
+          <v-btn exact :to="{ name: 'StudentEvent' }" text
+            >Home
+          </v-btn></v-list-item-title
+        >
+      </v-list-item>
+      <v-list-item v-show="role == 'STUDENT'" link>
+        <v-list-item-icon>
+          <v-icon>mdi-account-multiple</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>
+          <v-btn exact :to="{ name: 'userStudent' }" text
+            >Profile
+          </v-btn></v-list-item-title
+        >
+      </v-list-item>
+
       <v-list-item v-show="role == 'ADMIN'" link>
         <v-list-item-icon>
           <v-icon>mdi-folder</v-icon>
@@ -45,16 +65,6 @@
         <v-list-item-title>
           <v-btn exact :to="{ name: 'InstrumentList' }" text
             >Instrument
-          </v-btn></v-list-item-title
-        >
-      </v-list-item>
-      <v-list-item v-show="role == 'STUDENT'" link>
-        <v-list-item-icon>
-          <v-icon>mdi-account-multiple</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>
-          <v-btn exact :to="{ name: 'StudentEvent' }" text
-            >Sign up
           </v-btn></v-list-item-title
         >
       </v-list-item>
@@ -89,35 +99,13 @@
         </v-list-item-icon>
 
         <v-list-item-title>
-          <v-btn exact :to="{ name: 'CritiqueList' }" text
-            >Critiques
-          </v-btn></v-list-item-title
-        >
-      </v-list-item>
-
-      <v-list-item v-show="role == 'STUDENT'" link>
-        <v-list-item-icon>
-          <v-icon>mdi-folder</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>
-          <v-btn exact :to="{ name: 'SongList' }" text
-            >Piece
+          <v-btn exact :to="{ name: 'faculityHome' }" text
+            >Home
           </v-btn></v-list-item-title
         >
       </v-list-item>
 
       <v-list-item v-show="role == 'Accompanist'" link>
-        <v-list-item-icon>
-          <v-icon>mdi-folder</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>
-          <v-btn exact :to="{ name: 'Avalablity' }" text
-            >Sign up Avalablity
-          </v-btn></v-list-item-title
-        >
-      </v-list-item>
-
-      <v-list-item v-show="role == 'FACULITY'" link>
         <v-list-item-icon>
           <v-icon>mdi-folder</v-icon>
         </v-list-item-icon>
