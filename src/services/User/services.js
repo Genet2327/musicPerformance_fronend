@@ -4,9 +4,7 @@ export default {
   getAll() {
     return apiClient.get("/user");
   },
-  getAllAccompanist() {
-    return apiClient.get("/role/allAccompanist");
-  },
+ 
   getRoles() {
     return apiClient.get("/user/roles");
   },

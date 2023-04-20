@@ -21,7 +21,11 @@
         <v-card-text>
           <b>{{ message }}</b>
         </v-card-text>
-        <v-data-table :headers="headers" :items="filterOldItems" :search="search">
+        <v-data-table
+          :headers="headers"
+          :items="filterOldItems"
+          :search="search"
+        >
           <template v-slot:body="{ items }">
             <tbody>
               <tr v-for="(item, index) in items" :key="index">
@@ -74,19 +78,20 @@ export default {
     this.retrieveCritiques();
   },
   computed: {
-   
     filterOldItems() {
       const current = new Date();
       var localTime = moment(current).format("YYYY-MM-DD"); // store localTime
       var proposedDate = localTime + "T00:00:00.000Z";
 
-      return this.items.filter((i) => i.signUpId != null && i.date < proposedDate);
+      return this.items.filter(
+        (i) => i.signUpId != null && i.date < proposedDate
+      );
     },
   },
   methods: {
     editCritique(item) {
       this.$router.push({
-        name: "EditCritique",
+        name: "ViewCritique",
         params: { id: item.signUpId },
       });
     },
@@ -98,15 +103,6 @@ export default {
         .catch((e) => {
           this.message = e.response.data.message;
         });
-    },
-    refreshList() {
-      this.retrieveCritiques();
-      this.currentCritique = null;
-      this.currentIndex = -1;
-    },
-    setActiveCritique(item, index) {
-      this.currentCritique = item;
-      this.currentIndex = item ? index : -1;
     },
     formatDate(datetime) {
       const date = new Date(datetime);

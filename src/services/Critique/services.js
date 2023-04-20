@@ -1,6 +1,9 @@
 import apiClient from "@/services/services.js";
 
 export default {
+  getAllEvents(EventSessionId) {
+    return apiClient.get(`/critique/events/${EventSessionId}`);
+  },
   getAll() {
     return apiClient.get("/critique");
   },

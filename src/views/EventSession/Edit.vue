@@ -18,14 +18,7 @@
           required
         >
         </v-text-field>
-        <v-text-field
-          v-model="eventSession.durationSession"
-          id="durationSession"
-          :counter="50"
-          label=" duration Session"
-          required
-        >
-        </v-text-field>
+        
 
         <v-btn
           :disabled="!valid"
@@ -68,7 +61,7 @@ export default {
     updateEventSession() {
       var data = {
         type: this.eventSession.type,
-        durationSession: this.eventSession.durationSession,
+        
       };
       EventSessionServices.update(this.id, data)
         .then((response) => {

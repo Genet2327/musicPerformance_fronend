@@ -89,7 +89,6 @@ export default {
         params: { id: EventSession.id },
       });
     },
-
     retrieveEventSessions() {
       EventSessionServices.getAll()
         .then((response) => {

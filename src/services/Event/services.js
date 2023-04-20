@@ -1,9 +1,6 @@
-
-
 import apiClient from "@/services/services.js";
 
 export default {
- 
   getAllEvents(eventSessionId) {
     return apiClient.get(`/eventSessions/${eventSessionId}/events`);
   },
@@ -28,7 +25,18 @@ export default {
   getAvalableEvent(id) {
     return apiClient.get(`/eventSessions/Avalablity/${id}`);
   },
-  deleteAvalability(userId, EventId){
+  deleteAvalability(userId, EventId) {
     return apiClient.delete(`/eventSessions/Avalablity/${userId}/${EventId}`);
-  }
-}
+  },
+  getSignUpEvent(eventSessionId) {
+    return apiClient.get(`/eventSessions/findAllNullSignUP/${eventSessionId}`);
+  },
+  getUserSignUpEvent(eventSessionId, userId) {
+    return apiClient.get(
+      `/eventSessions/findAllNotNullSignUP/${eventSessionId}/${userId}`
+    );
+  },
+  getOneEvent(id) {
+    return apiClient.get(`/eventSessions/events/${id}`);
+  },
+};

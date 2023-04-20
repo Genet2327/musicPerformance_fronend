@@ -2,12 +2,18 @@
 import apiClient from "@/services/services.js";
 
 export default {
+  getAllSongByUserId(userId) {
+    return apiClient.get(`/songs/allsong/${userId}`);
+  }, 
   getAll() {
     return apiClient.get("/songs");
   },
-  getAllForUser(userId) {
-    return apiClient.get("/songs/userTut/" + userId);
-  },
+  getAllSignUpIdr(signUpId) {
+    return apiClient.get(`/songs/SignUpId/${signUpId}`);
+  }, 
+  getAllSongForUser(userId) {
+    return apiClient.get(`/songs/allByUserId/${userId}`);
+  }, 
   get(id) {
     return apiClient.get(`/songs/${id}`);
   },
