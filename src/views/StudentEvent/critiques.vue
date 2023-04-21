@@ -19,14 +19,15 @@
 
     <v-container>
       <v-toolbar>
-        <v-toolbar-title> {{ eventSession.type }} </v-toolbar-title>
+        <v-toolbar-title> Critiques </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-title>{{ this.message }}</v-toolbar-title>
       </v-toolbar>
       <br />
       <v-card>
         <v-card-title>
-          Upcoming event
+          View  
+          {{ eventSession.type }} Critiques
           <v-spacer></v-spacer>
           <v-text-field
             v-model="search"
@@ -69,7 +70,7 @@
 </template>
 <script>
 import EventServices from "../../services/Event/services";
-
+import EventSessionServices from "../../services/EventSession/services";
 import Utils from "@/config/utils.js";
 import moment from "moment";
 
@@ -106,6 +107,7 @@ export default {
   mounted() {
     this.user = Utils.getStore("user");
     this.retrieveEventServices();
+    this.retrieveEventSession();
   },
   computed: {
     filterOldItems() {
@@ -123,6 +125,16 @@ export default {
     },
   },
   methods: {
+    retrieveEventSession() {
+      EventSessionServices.get(this.id)
+        .then((response) => {
+          this.eventSession = response.data;
+         
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
     formatDate(datetime) {
       const date = new Date(datetime);
       return date.toISOString().split("T")[0];

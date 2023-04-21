@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-card>
-        <v-card-title class="headline">change </v-card-title>
+        <v-card-title class="headline">Change Sign Up Details</v-card-title>
         <br />
         <h4>{{ message }}</h4>
         <br />
@@ -12,7 +12,7 @@
             :items="Accompanist"
             :searchable="true"
             item-text="fName"
-            item-value="id"
+            item-value="id"                                                                                                                                                       
             label="Select your Accompanist"
           />
           <v-select
@@ -52,7 +52,7 @@
                         <v-icon
                           small
                           class="mx-4"
-                          @click="deledeleteSongteEventSession(item)"
+                          @click="deleteSong(item)"
                         >
                           mdi-trash-can
                         </v-icon>
@@ -263,7 +263,7 @@ export default {
         });
     },
     cancel() {
-      this.$router.push({ name: "EventSessionList" });
+      this.$router.push({ name: "StudentEvent" });
     },
     retrieveSong() {
       SongServices.getAllSignUpIdr(this.id)
@@ -294,7 +294,7 @@ export default {
           console.log("add Eroro" + e.response.data.message);
           this.message = e.response.data.message;
         });
-      // this.$router.push({ name: "ViewStudentEvent" });
+      this.$router.push({ name: "StudentEvent" });
     },
     clear() {
       this.inputText = "";

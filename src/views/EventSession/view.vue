@@ -29,23 +29,36 @@
         <v-card-text>
           <b>{{ message }}</b>
         </v-card-text>
-        <v-data-table
-          :headers="headers"
+        <v-data-table  :headers="headers"
           :search="search"
           :items="events"
           :items-per-page="50"
         >
-          <template v-slot:[`item.actions`]="{ item }">
-            <div>
-              <v-icon small class="mx-4" @click="editEvent(item)">
+          <template v-slot:body="{ items }">
+            <tbody>
+              <tr v-for="(item, index) in items" :key="index">
+                <td>{{ formatDate(item.date) }}</td>
+                <td>{{ item.room }}</td>
+                <td>
+                  {{ item.startTime }}
+                </td>
+                <td>
+                  {{ item.endTime }}
+                </td>
+                
+                <td>
+                  <v-icon small class="mx-4" @click="editEvent(item)">
                 mdi-pencil
               </v-icon>
               <v-icon small class="mx-4" @click="deleteEvent(item)">
                 mdi-trash-can
               </v-icon>
-            </div>
+                </td>
+              </tr>
+            </tbody>
           </template>
         </v-data-table>
+       
       </v-card>
     </v-container>
   </div>
@@ -76,6 +89,10 @@ export default {
     this.retrieveEvents();
   },
   methods: {
+    formatDate(datetime) {
+      const date = new Date(datetime);
+      return date.toISOString().split("T")[0];
+    },
     retrieveEvents() {
       EventSessionServices.get(this.id)
         .then((response) => {
