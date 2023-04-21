@@ -46,6 +46,10 @@ import ViewStudentEvent from "./views/StudentEvent/view";
 import signUpEvent from "./views/StudentEvent/signUp";
 import EditEventSignUP from "./views/StudentEvent/Edit";
 import ChangesignUpEvent from "./views/StudentEvent/change.vue";
+import missItem from "./views/StudentEvent/missItem";
+import missItemComposer from "./views/StudentEvent/AddMissItem.vue";
+import missAddInstrument from "./views/StudentEvent/AddMissInstrument";
+
 
 import CritiquesStudent from "./views/StudentEvent/critiques.vue";
 import ViewCritiques from "./views/StudentEvent/ViewCritiques";
@@ -62,6 +66,22 @@ const router = new Router({
     //    process.env.NODE_ENV === 'development'? "/" : "/tutorScheduling/", - for AWS
     process.env.NODE_ENV === "development" ? "/" : "/",
   routes: [
+    
+    {
+      path: "/missAddInstrument/",
+      name: "missAddInstrument",
+      component: missAddInstrument,
+    },
+    {
+      path: "/missItemComposer/",
+      name: "missItemComposer",
+      component: missItemComposer,
+    },
+    {
+      path: "/missItem/",
+      name: "missItem",
+      component: missItem,
+    },
     {
       path: "/",
       name: "login",

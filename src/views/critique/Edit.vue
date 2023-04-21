@@ -1,22 +1,12 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog v-model="dialog" max-width="1000px">
       <v-card>
         <v-card-title>
           <span class="text-h5">{{ formTitle }}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-form ref="form" v-model="valid" lazy validation>
-              <v-text-field
-                v-model="editedItem.deportment"
-                id="name"
-                :counter="50"
-                label="Stage Deportment (Pois, entrance)"
-                required
-              >
-              </v-text-field>
-            </v-form>
             <v-form ref="form" v-model="valid" lazy validation>
               <v-text-field
                 v-model="editedItem.tone"
@@ -67,6 +57,46 @@
                 id="name"
                 :counter="50"
                 label="Balance Blend"
+                required
+              >
+              </v-text-field>
+            </v-form>
+            <v-form ref="form" v-model="valid" lazy validation>
+              <v-text-field
+                v-model="editedItem.stagedeportment"
+                id="name"
+                :counter="50"
+                label="Stage Deportment"
+                required
+              >
+              </v-text-field>
+            </v-form>
+            <v-form ref="form" v-model="valid" lazy validation>
+              <v-text-field
+                v-model="editedItem.diction"
+                id="name"
+                :counter="50"
+                label="Diction"
+                required
+              >
+              </v-text-field>
+            </v-form>
+            <v-form ref="form" v-model="valid" lazy validation>
+              <v-text-field
+                v-model="editedItem.performance"
+                id="name"
+                :counter="50"
+                label="Performance"
+                required
+              >
+              </v-text-field>
+            </v-form>
+            <v-form ref="form" v-model="valid" lazy validation>
+              <v-text-field
+                v-model="editedItem.performance"
+                id="name"
+                :counter="50"
+                label="Stage Dept"
                 required
               >
               </v-text-field>
@@ -134,7 +164,7 @@ export default {
   data() {
     return {
       dialog: false,
-      songId : null,
+      songId: null,
       editedIndex: -1,
       editedItem: {},
       foreignText: null,
@@ -165,12 +195,11 @@ export default {
   },
   methods: {
     async openCreateDialog(item) {
-     this.songId = item.id;
+      this.songId = item.id;
 
       this.dialog = true;
       await SongCritiqueServices.getOneBySongId(this.songId, this.user.userId)
         .then((response) => {
-         
           const data = response.data;
           if (data != null) {
             this.editedItem = data.critique;
@@ -184,11 +213,14 @@ export default {
     },
     async saveCritique() {
       var data = {
+        stagedeportment: this.editedItem.stagedeportment,
         tone: this.editedItem.tone,
         accuracy: this.editedItem.accuracy,
         technique: this.editedItem.technique,
         interpretation: this.editedItem.interpretation,
         balanceblend: this.editedItem.balanceblend,
+        diction: this.editedItem.diction,
+        performance: this.editedItem.performance,
       };
       if (this.editedItem.id != null) {
         await CritiqueServices.update(this.editedItem.id, data)
@@ -274,7 +306,7 @@ export default {
     cancel() {
       this.$router.push({ name: "CritiqueList" });
     },
-    close() {},
+    close() {this.dialog = false},
   },
 };
 </script>

@@ -75,6 +75,11 @@
                   If the text is in a Foreign Language Check
                   <input type="checkbox" v-model="isChecked" />
                 </label>
+                <br>
+                <label>
+                  If your Composer or other information does not appear, submit that information to the music office by clicking <a href="#" @click.prevent="openDialog()">here</a> 
+                 
+                </label>
 
                 <br />
                 <v-form
@@ -164,12 +169,14 @@ import InstrumentServices from "../../services/Instrument/services";
 import SignUpServices from "../../services/SignUp/services";
 import SongServices from "../../services/Song/services";
 import EventServices from "../../services/Event/services";
+import EventSessionServices from "../../services/EventSession/services";
 import axios from "axios";
 export default {
   name: "view-eventSession",
   props: ["id"],
   data() {
     return {
+      eventSession: {},
       targetLang: "en",
       sourceLang: "",
       inputText: "",
@@ -229,8 +236,22 @@ export default {
     this.retrieveInstruments();
     this.retrieveAccompanist();
     this.retrieveComposers();
+    this.retrieveEventSession();
   },
   methods: {
+    openDialog(){
+      this.$router.push({ name: "missItem" });
+    },
+    retrieveEventSession() {
+      EventSessionServices.get(this.id)
+        .then((response) => {
+          this.eventSession = response.data;
+         
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
     deleteSong(item) {
       const index = this.songs.indexOf(item);
       this.songs.splice(index, 1);

@@ -2,7 +2,7 @@
     <div>
       <v-container>
         <v-toolbar>
-          <v-toolbar-title>hh</v-toolbar-title>
+          <v-toolbar-title></v-toolbar-title>
           <!-- <v-spacer></v-spacer>
               <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
         </v-toolbar>

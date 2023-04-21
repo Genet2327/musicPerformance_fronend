@@ -119,7 +119,7 @@ export default {
   name: "add-composer",
   data() {
     return {
-      valid: false,
+      valid: true,
       user: {},
       menu: false,
       menu1: false,
@@ -153,7 +153,7 @@ export default {
         .then((response) => {
           this.composer.id = response.data.id;
           console.log("add " + response.data);
-          this.$router.push({ name: "ComposerList" });
+          this.$router.push({ name: "missItem" });
         })
         .catch((e) => {
           console.log("add Eroro" + e.response.data.message);
@@ -163,7 +163,7 @@ export default {
     cancel() {
     
 
-      this.$router.push({ name: "ComposerList" });
+      this.$router.push({ name: "missItem" });
     },
   },
 };
